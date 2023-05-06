@@ -1,14 +1,12 @@
 package com.yevini.myvelog.response;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.redis.core.RedisHash;
 
-@NoArgsConstructor
 @Getter
-@JsonDeserialize(using = CurrentUserParser.class)
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     private String username;
@@ -16,13 +14,10 @@ public class User {
     private String displayName;
     private String accessToken;
 
-    public User(String username, String thumbnail, String displayName) {
-        this.username = username;
-        this.thumbnail = thumbnail;
-        this.displayName = displayName;
-    }
-
-    public void setAccessToken(String accessToken) {
+    public User(CurrentUser currentUser, String accessToken){
+        this.username = currentUser.getUsername();
+        this.thumbnail = currentUser.getThumbnail();
+        this.displayName = currentUser.getDisplayName();
         this.accessToken = accessToken;
     }
 }

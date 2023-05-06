@@ -1,9 +1,9 @@
 package com.yevini.myvelog.request.body.variables;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-@Builder
+@AllArgsConstructor
 @Getter
 public class UserTagsVariables implements Variables {
 

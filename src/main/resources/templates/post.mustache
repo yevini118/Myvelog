@@ -27,15 +27,28 @@
 
             <button class="menu-btn focus:outline-none focus:shadow-outline flex flex-wrap items-center">
                 <div class="w-8 h-8 overflow-hidden rounded-full">
-                    <img class="w-full h-full object-cover" src="/img/user.png" >
+                    <img class="w-full h-full object-cover" src="{{user.thumbnail}}" >
                 </div>
 
                 <div class="ml-2 capitalize flex ">
-                    <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">로그인</h1>
+                    <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">{{user.username}}</h1>
                     <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
                 </div>
             </button>
 
+            <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
+
+            <div class="text-gray-500 menu hidden md:mt-10 md:w-full rounded bg-white shadow-md absolute z-20 right-0 w-40 mt-5 py-2 animated faster">
+                <hr>
+
+                <!-- item -->
+                <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="/logout/{{user.username}}">
+                    <i class="fad fa-user-times text-xs mr-1"></i>
+                    log out
+                </a>
+                <!-- end item -->
+
+            </div>
         </div>
         <!-- end user -->
     </div>
@@ -74,17 +87,8 @@
 
             <!-- link -->
             <a href="./index-1.html" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-                <i class="fad fa-shopping-cart text-xs mr-2"></i>
-                ecommerce dashboard
-            </a>
-            <!-- end link -->
-
-            <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">apps</p>
-
-            <!-- link -->
-            <a href="./email.html" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-                <i class="fad fa-envelope-open-text text-xs mr-2"></i>
-                email
+                <i class="fad fa-trophy-alt text-xs mr-2"></i>
+                Post Rank
             </a>
             <!-- end link -->
         </div>
@@ -95,22 +99,55 @@
 
     <!-- strat content -->
     <div class="bg-gray-100 flex-1 p-6 md:mt-16">
-        <div style="text-align: center; display: flex; flex-direction: column; align-items: center;">
-            <img class="object-cover" src="/img/index.png" style="width: 20%;">
-            <h1 class="h2" style="font-size: 1.7rem; margin-top: 30px;">아직 로그인 하지 않았어요!</h1>
-            {{#timeout}}
-                <p style="color: #f56565; font-size: 1rem; font-weight: bold; margin-top: 10px;">로그인 시간 초과 다시 로그인해주세요</p>
-            {{/timeout}}
-            {{#logout}}
-                <p style="color: #f56565; font-size: 1rem; font-weight: bold; margin-top: 10px;">로그아웃된 사용자 다시 로그인해주세요</p>
-            {{/logout}}
-            <a href="/login" class="btn-shadow mt-6" style="width: 400px; height: 50px; font-size: larger; font-weight: bold;">로그인</a>
+
+        <!-- start quick Info -->
+        <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
+
+            <!-- Start Recent Sales -->
+            <div class="card col-span-3 xl:col-span-1">
+                <div class="card-header">
+                    <h1 class="h6">조회수 순위</h1>
+                </div>
+
+                <table class="table-auto w-full text-left">
+                    <thead>
+                    <tr>
+                        <th class="px-4 py-2 border-r"></th>
+                        <th class="px-4 py-2 border-r">게시글</th>
+                        <th class="px-4 py-2 border-r">좋아요</th>
+                        <th class="px-4 py-2">조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-gray-600">
+
+                    {{ #stats.topPosts }}
+                    <tr>
+                        <td class="border border-l-0 px-4 py-2 text-center"><i>{{num}}</i></td>
+                        <td class="border border-l-0 px-4 py-2">{{title}}</td>
+                        <td class="border border-l-0 px-4 py-2">{{likes}}<span class="num-2"></span></td>
+                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
+                    </tr>
+                    {{ /stats.topPosts }}
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- End Recent Sales -->
+
         </div>
 
+
     </div>
-    <!-- end content -->
+    <!-- end body -->
+
+</div>
+<!-- end Sales Overview -->
+
+</div>
+<!-- end content -->
 
 </div>
 <!-- end wrapper -->
+
 
 {{>layout/footer}}

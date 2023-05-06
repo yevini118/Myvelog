@@ -8,8 +8,6 @@ import lombok.Getter;
 public class PostsVariables implements Variables {
 
     private String username;
-
     private String tag;
-
     private int limit;
 }

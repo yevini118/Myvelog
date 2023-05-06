@@ -1,9 +1,12 @@
 package com.yevini.myvelog.velog;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.yevini.myvelog.response.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -13,23 +16,40 @@ public class MyvelogController {
 
     private final MyvelogService myvelogService;
 
+    @ModelAttribute
+
     @RequestMapping("")
     public String index() {
 
         return "index";
     }
 
-    @RequestMapping("/main/{username}")
-    public String main(@PathVariable String username) {
+    @GetMapping("/main/{username}")
+    public String main(@PathVariable String username, Model model) {
 
-        myvelogService.main(username);
+        myvelogService.main(username, model);
         return "main";
+    }
+
+    @GetMapping("/post/{username}")
+    public String post(@PathVariable String username, Model model) {
+
+
+        return "post";
     }
 
     @GetMapping("/login")
     public String login() throws JsonProcessingException {
 
-        myvelogService.login();
-        return "redirect:/main";
+        String username = myvelogService.login();
+        return "redirect:/main/" + username;
     }
+
+    @GetMapping("/logout/{username}")
+    public String logout(@PathVariable String username) {
+
+        myvelogService.logout(username);
+        return "redirect:/";
+    }
+
 }

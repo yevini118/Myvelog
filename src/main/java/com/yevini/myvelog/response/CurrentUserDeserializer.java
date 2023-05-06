@@ -1,15 +1,14 @@
 package com.yevini.myvelog.response;
 
-import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.*;
 
 import java.io.IOException;
 
-public class CurrentUserParser extends JsonDeserializer<User> {
+public class CurrentUserDeserializer extends JsonDeserializer<CurrentUser> {
 
     @Override
-    public User deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public CurrentUser deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -20,6 +19,6 @@ public class CurrentUserParser extends JsonDeserializer<User> {
         String thumbnail = profileNode.get("thumbnail").asText();
         String displayName = profileNode.get("display_name").asText();
 
-        return new User(username, thumbnail, displayName);
+        return new CurrentUser(username, thumbnail, displayName);
     }
 }

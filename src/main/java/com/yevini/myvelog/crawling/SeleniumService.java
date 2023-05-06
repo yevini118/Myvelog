@@ -2,7 +2,9 @@ package com.yevini.myvelog.crawling;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yevini.myvelog.response.CurrentUser;
 import com.yevini.myvelog.response.User;
+import lombok.RequiredArgsConstructor;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -11,7 +13,6 @@ import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.time.Duration;
 
@@ -24,19 +25,21 @@ public class SeleniumService{
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-bqiRlB";
     private static final String USER_PROFILE_CLASS_NAME = "sc-fotOHu";
 
+
     public User process() throws JsonProcessingException {
+
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\USER\\Downloads\\chromedriver_win32\\chromedriver.exe");
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
 
-        System.setProperty("webdriver.http.factory", "jdk-http-client");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\USER\\Downloads\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver(chromeOptions);
-
         driver.get(URL);
         driver.findElement(By.className(LOGIN_BUTTON_CLASS_NAME)).click();
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofMinutes(3));
         try
         {
             webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(USER_PROFILE_CLASS_NAME)));
@@ -45,13 +48,13 @@ public class SeleniumService{
             throw new TimeoutException();
         }
 
-        User user = getCurrentUser();
+        CurrentUser currentUser = getCurrentUser();
         String accessToken = getAccessToken();
-        user.setAccessToken(accessToken);
 
         driver.quit();
-        return user;
+        return new User(currentUser, accessToken);
     }
+
 
     private String getAccessToken(){
 
@@ -59,7 +62,7 @@ public class SeleniumService{
     }
 
 
-    private User getCurrentUser() throws JsonProcessingException {
+    private CurrentUser getCurrentUser() throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
         WebStorage storage = (WebStorage)driver;
@@ -67,7 +70,6 @@ public class SeleniumService{
         LocalStorage localStorage = storage.getLocalStorage();
         String currentUser = localStorage.getItem("CURRENT_USER");
 
-        return objectMapper.readValue(currentUser, User.class);
+        return objectMapper.readValue(currentUser, CurrentUser.class);
     }
-
 }
