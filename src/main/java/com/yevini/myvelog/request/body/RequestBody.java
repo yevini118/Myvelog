@@ -9,8 +9,6 @@ import lombok.Getter;
 public class RequestBody {
 
     private String operationName;
-
     private Variables variables;
-
     private String query;
 }

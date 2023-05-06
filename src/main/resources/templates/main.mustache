@@ -5,7 +5,7 @@
 
     <!-- logo -->
     <div class="flex-none w-56 flex flex-row items-center">
-        <img src="img/logo.png" class="w-10 flex-none">
+        <img src="/img/logo.png" class="w-10 flex-none">
         <strong class="capitalize ml-1 flex-1"> MyVelog</strong>
 
         <button id="sliderBtn" class="flex-none text-right text-gray-900 hidden md:block">
@@ -27,11 +27,11 @@
 
             <button class="menu-btn focus:outline-none focus:shadow-outline flex flex-wrap items-center">
                 <div class="w-8 h-8 overflow-hidden rounded-full">
-                    <img class="w-full h-full object-cover" src="img/user.png" >
+                    <img class="w-full h-full object-cover" src="{{user.thumbnail}}" >
                 </div>
 
                 <div class="ml-2 capitalize flex ">
-                    <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">moeSaid</h1>
+                    <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">{{user.username}}</h1>
                     <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
                 </div>
             </button>
@@ -39,39 +39,10 @@
             <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
 
             <div class="text-gray-500 menu hidden md:mt-10 md:w-full rounded bg-white shadow-md absolute z-20 right-0 w-40 mt-5 py-2 animated faster">
-
-                <!-- item -->
-                <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
-                    <i class="fad fa-user-edit text-xs mr-1"></i>
-                    edit my profile
-                </a>
-                <!-- end item -->
-
-                <!-- item -->
-                <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
-                    <i class="fad fa-inbox-in text-xs mr-1"></i>
-                    my inbox
-                </a>
-                <!-- end item -->
-
-                <!-- item -->
-                <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
-                    <i class="fad fa-badge-check text-xs mr-1"></i>
-                    tasks
-                </a>
-                <!-- end item -->
-
-                <!-- item -->
-                <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
-                    <i class="fad fa-comment-alt-dots text-xs mr-1"></i>
-                    chats
-                </a>
-                <!-- end item -->
-
                 <hr>
 
                 <!-- item -->
-                <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="#">
+                <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="/logout/{{user.username}}">
                     <i class="fad fa-user-times text-xs mr-1"></i>
                     log out
                 </a>
@@ -116,17 +87,8 @@
 
             <!-- link -->
             <a href="./index-1.html" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-                <i class="fad fa-shopping-cart text-xs mr-2"></i>
-                ecommerce dashboard
-            </a>
-            <!-- end link -->
-
-            <p class="uppercase text-xs text-gray-600 mb-4 mt-4 tracking-wider">apps</p>
-
-            <!-- link -->
-            <a href="./email.html" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
-                <i class="fad fa-envelope-open-text text-xs mr-2"></i>
-                email
+                <i class="fad fa-trophy-alt text-xs mr-2"></i>
+                Post Rank
             </a>
             <!-- end link -->
         </div>
@@ -147,7 +109,7 @@
 
                     <!-- image -->
                     <div class="img-wrapper w-40 h-40 flex justify-center items-center">
-                        <img src="./img/total.png" alt="img title">
+                        <img src="/img/total.png" alt="img title">
                     </div>
                     <!-- end image -->
 
@@ -156,7 +118,7 @@
                         <h1 class="h6">내 벨로그 총 조회수</h1>
                         <p class="text-white text-xs">와우! 지금까지 게시글들의 총 조회수가 무려</p>
 
-                        <h1 class="h2">5,337개</h1>
+                        <h1 class="h2">{{stats.totalVisits}}개</h1>
                     </div>
                     <!-- end info -->
 
@@ -170,7 +132,7 @@
                 <!-- alert -->
                 <div class="alert alert-dark mb-6">
                     내 벨로그 가기
-                    <a class="ml-2" target="_blank" href="https://velog.io/@yevini118">@yevini118</a>
+                    <a class="ml-2" target="_blank" href="https://velog.io/@{{user.username}}">@{{user.username}}</a>
                 </div>
                 <!-- end alert -->
 
@@ -180,10 +142,10 @@
                     <div class="card">
                         <div class="py-3 px-4 flex flex-row justify-between">
                             <h1 class="h6">
-                                <span class="num-4"></span>30
+                                <span class="num-4"></span>{{stats.totalLikes}}
                                 <p>총 좋아요</p>
                             </h1>
-                            <img src="./img/like.png" alt="img like" style="width: 15%;height: 15%;">
+                            <img src="/img/like.png" alt="img like" style="width: 15%;height: 15%;">
                         </div>
                         <div class="analytics_1"></div>
                     </div>
@@ -191,10 +153,10 @@
                     <div class="card">
                         <div class="py-3 px-4 flex flex-row justify-between">
                             <h1 class="h6">
-                                <span class="num-2"></span>65
+                                <span class="num-2">{{stats.totalPosts}}</span>
                                 <p>총 게시글</p>
                             </h1>
-                            <img src="./img/post.png" alt="img post" style="width: 15%;height: 15%;">
+                            <img src="/img/post.png" alt="img post" style="width: 15%;height: 15%;">
                         </div>
                         <div class="analytics_1"></div>
                     </div>
@@ -212,65 +174,11 @@
         <!-- start quick Info -->
         <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
 
-
-            <!-- Browser Stats -->
-            <div class="card">
-                <div class="card-header">Browser Stats</div>
-
-                <!-- brawser -->
-                <div class="p-6 flex flex-row justify-between items-center text-gray-600 border-b">
-                    <div class="flex items-center">
-                        <i class="fab fa-chrome mr-4"></i>
-                        <h1>google chrome</h1>
-                    </div>
-                    <div>
-                        <span class="num-2"></span>%
-                    </div>
-                </div>
-                <!-- end brawser -->
-
-                <!-- brawser -->
-                <div class="p-6 flex flex-row justify-between items-center text-gray-600 border-b">
-                    <div class="flex items-center">
-                        <i class="fab fa-firefox mr-4"></i>
-                        <h1>firefox</h1>
-                    </div>
-                    <div>
-                        <span class="num-2"></span>%
-                    </div>
-                </div>
-                <!-- end brawser -->
-
-                <!-- brawser -->
-                <div class="p-6 flex flex-row justify-between items-center text-gray-600 border-b">
-                    <div class="flex items-center">
-                        <i class="fab fa-internet-explorer mr-4"></i>
-                        <h1>internet explorer</h1>
-                    </div>
-                    <div>
-                        <span class="num-2"></span>%
-                    </div>
-                </div>
-                <!-- end brawser -->
-
-                <!-- brawser -->
-                <div class="p-6 flex flex-row justify-between items-center text-gray-600 border-b-0">
-                    <div class="flex items-center">
-                        <i class="fab fa-safari mr-4"></i>
-                        <h1>safari</h1>
-                    </div>
-                    <div>
-                        <span class="num-2"></span>%
-                    </div>
-                </div>
-                <!-- end brawser -->
-
-            </div>
-            <!-- end Browser Stats -->
-
             <!-- Start Recent Sales -->
-            <div class="card col-span-2 xl:col-span-1">
-                <div class="card-header">조회수 순위</div>
+            <div class="card col-span-3 xl:col-span-1">
+                <div class="card-header">
+                    <h1 class="h6">조회수 순위</h1>
+                </div>
 
                 <table class="table-auto w-full text-left">
                     <thead>
@@ -283,42 +191,14 @@
                     </thead>
                     <tbody class="text-gray-600">
 
-                    <tr>
-                        <td class="border border-l-0 px-4 py-2 text-center"><i>1</i></td>
-                        <td class="border border-l-0 px-4 py-2">Lightning to USB-C Adapter Lightning.</td>
-                        <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
-                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-l-0 px-4 py-2 text-center"><i>2</i></td>
-                        <td class="border border-l-0 px-4 py-2">Apple iPhone 8.</td>
-                        <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
-                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-l-0 px-4 py-2 text-center"><i>3</i></td>
-                        <td class="border border-l-0 px-4 py-2">Apple MacBook Pro.</td>
-                        <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
-                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-l-0 px-4 py-2 text-center"><i>4</i></td>
-                        <td class="border border-l-0 px-4 py-2">Samsung Galaxy S9.</td>
-                        <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
-                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-l-0 px-4 py-2 text-center"><i>5</i></td>
-                        <td class="border border-l-0 px-4 py-2">Samsung Galaxy S8 256GB.</td>
-                        <td class="border border-l-0 px-4 py-2">$<span class="num-2"></span></td>
-                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
-                    </tr>
-                    <tr>
-                        <td class="border border-l-0 border-b-0 px-4 py-2 text-center"><i>6</i></td>
-                        <td class="border border-l-0 border-b-0 px-4 py-2">apple watch.</td>
-                        <td class="border border-l-0 border-b-0 px-4 py-2">$<span class="num-2"></span></td>
-                        <td class="border border-l-0 border-b-0 border-r-0 px-4 py-2"><span class="num-2"></span> minutes ago</td>
-                    </tr>
+                    {{ #stats.topPosts }}
+                        <tr>
+                            <td class="border border-l-0 px-4 py-2 text-center"><i>{{num}}</i></td>
+                            <td class="border border-l-0 px-4 py-2">{{title}}</td>
+                            <td class="border border-l-0 px-4 py-2">{{likes}}<span class="num-2"></span></td>
+                            <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
+                        </tr>
+                    {{ /stats.topPosts }}
 
                     </tbody>
                 </table>
@@ -330,16 +210,16 @@
         <!-- end quick Info -->
 
         <!-- Sales Overview -->
-        <div class="card mt-6">
+<!--        <div class="card mt-6">-->
 
             <!-- header -->
-            <div class="card-header flex flex-row justify-between">
-                <h1 class="h6">전체 조회수 추이</h1>
-            </div>
+<!--            <div class="card-header flex flex-row justify-between">-->
+<!--                <h1 class="h6">전체 조회수 추이</h1>-->
+<!--            </div>-->
             <!-- end header -->
 
             <!-- body -->
-            <div class="card-body grid grid-cols-2 gap-6 lg:grid-cols-1">
+<!--            <div class="card-body grid grid-cols-2 gap-6 lg:grid-cols-1">-->
 
 <!--                <div class="p-8">-->
 <!--                    -->
@@ -362,11 +242,11 @@
 
 <!--                </div>-->
 
-                <div class="">
-                    <div id="sealsOverview">
-                        <canvas id="chartjs-7" class="chartjs" width="undefined" height="undefined"></canvas>
-                    </div>
-                </div>
+<!--                <div class="">-->
+<!--                    <div id="sealsOverview">-->
+<!--                        <canvas id="chartjs-7" class="chartjs" width="undefined" height="undefined"></canvas>-->
+<!--                    </div>-->
+<!--                </div>-->
 
             </div>
             <!-- end body -->
@@ -380,4 +260,31 @@
 </div>
 <!-- end wrapper -->
 
+<!--<script>-->
+<!--    new Chart(document.getElementById("chartjs-7"), {-->
+<!--        "type": "line",-->
+<!--        "data": {-->
+<!--            "labels": [{{ #stats.totalCountByDay }}-->
+<!--                            "{{day}}",-->
+<!--                        {{ /stats.totalCountByDay }}],-->
+<!--            "datasets": [{-->
+<!--                "label": "총 조회수",-->
+<!--                "data": [{{ #stats.totalCountByDay }}-->
+<!--                            "{{count}}",-->
+<!--                        {{ /stats.totalCountByDay }}],-->
+<!--                "borderColor": "#4fd1c5",-->
+<!--                "backgroundColor": "rgba(0, 0, 0, 0.1)"-->
+<!--            }]-->
+<!--        },-->
+<!--        "options": {-->
+<!--            "scales": {-->
+<!--                "yAxes": [{-->
+<!--                    "ticks": {-->
+<!--                        "beginAtZero": true-->
+<!--                    }-->
+<!--                }]-->
+<!--            }-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
 {{>layout/footer}}

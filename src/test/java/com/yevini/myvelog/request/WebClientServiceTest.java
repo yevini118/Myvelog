@@ -10,10 +10,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-class VelogServiceTest {
+class WebClientServiceTest {
 
     @InjectMocks
-    VelogService velogService;
+    WebClientService webClientService;
 
     @Test
     void userTags_가져오기() {
@@ -22,7 +22,7 @@ class VelogServiceTest {
         String username = "yevini118";
 
         //when
-        UserTags userTags = velogService.getUserTags(username);
+        UserTags userTags = webClientService.getUserTags(username);
 
         //then
         assertTrue(userTags.getTotalPostsCount() >= 0);
@@ -37,17 +37,9 @@ class VelogServiceTest {
         int totalPostsCount = 10;
 
         //when
-        Posts posts = velogService.getPosts(username, totalPostsCount);
+        Posts posts = webClientService.getPosts(username, totalPostsCount);
 
         //then
         assertEquals(posts.getPosts().size(), 10);
-    }
-
-    @Test
-    void getStats() {
-
-        //given
-        String postId = "bfd1061d-c564-43b4-a0c5-615546eb65e7";
-        String accessToken = "";
     }
 }

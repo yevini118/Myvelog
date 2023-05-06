@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class StatsDeserializer extends JsonDeserializer<Stats> {
+public class StatsDeserializer extends JsonDeserializer<Stat> {
 
     @Override
-    public Stats deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+    public Stat deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
@@ -22,6 +22,6 @@ public class StatsDeserializer extends JsonDeserializer<Stats> {
         int total = statsNode.get("total").asInt();
         List<CountByDay> countByDays = Arrays.stream(objectMapper.treeToValue(dayNode, CountByDay[].class)).toList();
 
-        return new Stats(total, countByDays);
+        return new Stat(total, countByDays);
     }
 }
