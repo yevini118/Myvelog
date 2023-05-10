@@ -6,7 +6,10 @@ import com.yevini.myvelog.redis.JwtService;
 import com.yevini.myvelog.redis.RedisService;
 import com.yevini.myvelog.request.RestTemplateService;
 import com.yevini.myvelog.request.WebClientService;
-import com.yevini.myvelog.response.*;
+import com.yevini.myvelog.response.Posts;
+import com.yevini.myvelog.response.Stat;
+import com.yevini.myvelog.response.User;
+import com.yevini.myvelog.response.UserTags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -35,7 +38,7 @@ public class MyvelogService {
         return user.getUsername();
     }
 
-    public void main(String username, Model model) {
+    public void main(String username, Model model) throws InterruptedException {
 
         User user = redisService.get(username);
 
@@ -43,7 +46,7 @@ public class MyvelogService {
         Posts posts = webClientService.getPosts(username, userTags.getTotalPostsCount());
 
         List<Stat> stats = webClientService.getStats(posts.getPosts(), user.getAccessToken());
-        System.out.println(stats.size());
+        System.out.println("Return size = " + stats.size());
 
         MyvelogStats myvelogStats = statService.getStat(userTags, posts, stats);
 

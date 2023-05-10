@@ -81,11 +81,10 @@ public class RestTemplateService {
 
     public List<Stat> getStats(List<Post> posts, String accessToken) {
 
-        List<Stat> stats = new ArrayList<>();
-
         HttpHeaders headers = new HttpHeaders();
         headers.set("cookie", "access_token=" + accessToken);
 
+        List<Stat> stats = new ArrayList<>();
         for (Post post : posts) {
 
             StatsVariables variables = new StatsVariables(post.getId());
@@ -106,14 +105,13 @@ public class RestTemplateService {
                             """)
                     .build();
 
-            HttpEntity<RequestBody> request = new HttpEntity<>(body, headers);
+            HttpEntity<RequestBody> entity = new HttpEntity<>(body, headers);
 
-            Stat stat = restTemplate.postForObject(REQUEST_URL, request, Stat.class);
+            Stat stat = restTemplate.postForObject(REQUEST_URL, entity, Stat.class);
             stat.setId(post.getId());
             stats.add(stat);
         }
 
         return stats;
     }
-
 }

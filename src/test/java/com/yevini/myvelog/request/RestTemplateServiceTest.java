@@ -45,7 +45,7 @@ class RestTemplateServiceTest {
         Posts posts = restTemplateService.getPosts(username, totalPostsCount);
 
         //then
-        assertEquals(posts.getPosts().size(), 10);
+        assertEquals(posts.getPosts().size(), totalPostsCount);
     }
 
 

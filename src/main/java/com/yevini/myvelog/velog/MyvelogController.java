@@ -25,7 +25,7 @@ public class MyvelogController {
     }
 
     @GetMapping("/main/{username}")
-    public String main(@PathVariable String username, Model model) {
+    public String main(@PathVariable String username, Model model) throws InterruptedException {
 
         myvelogService.main(username, model);
         return "main";

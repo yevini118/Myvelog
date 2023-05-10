@@ -1,58 +1,53 @@
 package com.yevini.myvelog.request;
 
-import com.yevini.myvelog.response.Posts;
+import com.yevini.myvelog.response.Post;
 import com.yevini.myvelog.response.Stat;
-import com.yevini.myvelog.response.UserTags;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 public class RequestSpeedTest {
 
-    @InjectMocks
+    @Autowired
     RestTemplateService restTemplateService;
+    @Autowired
     WebClientService webClientService;
 
-    private UserTags userTags = webClientService.getUserTags("yevini118");
-    private Posts posts = webClientService.getPosts("yevini118", userTags.getTotalPostsCount());
-    private String accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZGMyNjhlYzMtMDc0Yy00NDI5LTgyY2EtNjY4M2JlODFlOWQzIiwiaWF0IjoxNjgzMTIzMjEzLCJleHAiOjE2ODMxMjY4MTMsImlzcyI6InZlbG9nLmlvIiwic3ViIjoiYWNjZXNzX3Rva2VuIn0.IToBVlUTsybH3Eg06IpJZjufV59y9UbHDLAlYgyunN8";
+    private static List<Post> posts;
+    private final String accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZGMyNjhlYzMtMDc0Yy00NDI5LTgyY2EtNjY4M2JlODFlOWQzIiwiaWF0IjoxNjgzNjk3MzM2LCJleHAiOjE2ODM3MDA5MzYsImlzcyI6InZlbG9nLmlvIiwic3ViIjoiYWNjZXNzX3Rva2VuIn0.zLRTNZHOgsxOsRjN2vclQBazeKhLmsGBTfIhuJCm8rY";
+
+    @BeforeAll
+    public static void setUp(@Autowired WebClientService webClientService) {
+        posts = webClientService.getPosts("yevini118", 50).getPosts();
+    }
 
     @Test
     public void RestTemplate_속도() {
 
-        long start = System.currentTimeMillis();
-        List<Stat> stats = restTemplateService.getStats(posts.getPosts(), accessToken);
-        long end = System.currentTimeMillis();
+        List<Stat> stats = restTemplateService.getStats(posts, accessToken);
 
-        Assertions.assertEquals(stats.size(), posts.getPosts().size());
-        System.out.println("RestTemplate : " + (end-start) + "ms");
+        Assertions.assertEquals(stats.size(), posts.size());
     }
 
     @Test
     public void WebClient_비동기_속도() {
 
-        long start = System.currentTimeMillis();
-        List<Stat> stats = webClientService.getStats(posts.getPosts(), accessToken);
-        long end = System.currentTimeMillis();
+        List<Stat> stats = webClientService.getStats(posts, accessToken);
 
-        Assertions.assertEquals(stats.size(), posts.getPosts().size());
-        System.out.println("WebClient_NonBlock : " + (end-start) + "ms");
+        Assertions.assertEquals(stats.size(), posts.size());
     }
 
     @Test
     public void WebClient_동기_속도() {
 
-        long start = System.currentTimeMillis();
-        List<Stat> stats = webClientService.getStatsByBlock(posts.getPosts(), accessToken);
-        long end = System.currentTimeMillis();
+        List<Stat> stats = webClientService.getStatsByBlock(posts, accessToken);
 
-        Assertions.assertEquals(stats.size(), posts.getPosts().size());
-        System.out.println("WebClient_Block : " + (end-start) + "ms");
+        Assertions.assertEquals(stats.size(), posts.size());
     }
 
 }
