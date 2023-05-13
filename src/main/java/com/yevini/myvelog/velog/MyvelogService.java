@@ -1,6 +1,7 @@
 package com.yevini.myvelog.velog;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yevini.myvelog.crawling.SeleniumService;
 import com.yevini.myvelog.redis.JwtService;
 import com.yevini.myvelog.redis.RedisService;
@@ -46,7 +47,6 @@ public class MyvelogService {
         Posts posts = webClientService.getPosts(username, userTags.getTotalPostsCount());
 
         List<Stat> stats = webClientService.getStats(posts.getPosts(), user.getAccessToken());
-        System.out.println("Return size = " + stats.size());
 
         MyvelogStats myvelogStats = statService.getStat(userTags, posts, stats);
 

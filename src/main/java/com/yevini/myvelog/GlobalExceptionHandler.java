@@ -21,7 +21,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = JsonProcessingException.class)
     public String handleJsonProcessingException(Exception e) {
-        log.error("[JsonProcessingException]");
+        log.error("[JsonProcessingException] "+ e.getMessage());
         return "index";
     }
 
