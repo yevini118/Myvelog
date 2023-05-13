@@ -1,17 +1,24 @@
 package com.yevini.myvelog.response;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
-@JsonDeserialize(using = CurrentUserDeserializer.class)
 public class CurrentUser {
 
-    private String username;
-    private String thumbnail;
-    private String displayName;
+    private final String username;
+    private final String thumbnail;
+    private final String displayName;
+
+    @JsonCreator
+    public CurrentUser(@JsonProperty("username") String username, @JsonProperty("profile") JsonNode profileNode) {
+
+        this.username = username;
+        this.thumbnail = profileNode.get("thumbnail").asText();
+        this.displayName = profileNode.get("display_name").asText();
+    }
 }
