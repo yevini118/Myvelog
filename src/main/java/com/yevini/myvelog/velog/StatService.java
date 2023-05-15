@@ -8,9 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import static java.util.Comparator.comparingInt;
+import static java.util.Comparator.comparing;
 
 @Service
 public class StatService {
@@ -19,7 +18,7 @@ public class StatService {
 
         int totalVisits = getTotalVisits(stats);
         int totalLikes = getTotalLikes(posts.getPosts());
-        List<PostStats> topPosts = getTopPosts(posts, stats);
+        List<PostStat> topPosts = getPostsStats(posts.getPosts(), stats);
 
         return MyvelogStats.builder()
                 .totalPosts(userTags.getTotalPostsCount())
@@ -39,22 +38,21 @@ public class StatService {
         return posts.stream().mapToInt(Post::getLikes).sum();
     }
 
-    private List<PostStats> getTopPosts(Posts posts, List<Stat> stats) {
+    private List<PostStat> getPostsStats(List<Post> posts, List<Stat> stats) {
 
-        stats.sort(comparingInt(Stat::getTotal).reversed());
+        stats.sort(comparing(Stat::getId));
+        posts.sort(comparing(Post::getId));
 
-        List<PostStats> postStats = new ArrayList<>();
-        int postsSize = posts.getPosts().size();
+        List<PostStat> postStats = new ArrayList<>();
+        int postsSize = posts.size();
 
-        for(int i=0; i<10; i++) {
-            int finalI = i;
+        for(int i=0; i<postsSize; i++) {
 
-            if (i == postsSize-1) {
-                break;
-            }
-            Optional<Post> topPost = posts.getPosts().stream().filter(post -> post.getId().equals(stats.get(finalI).getId())).findAny();
-            postStats.add(new PostStats(i+1, topPost.get().getTitle(), topPost.get().getLikes(), stats.get(i).getTotal()));
+            postStats.add(new PostStat(posts.get(i).getTitle(), posts.get(i).getLikes(), stats.get(i).getTotal()));
         }
+
+        postStats.sort(comparing(PostStat::getVisits).reversed());
+
         return postStats;
     }
 }

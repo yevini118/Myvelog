@@ -1,10 +1,9 @@
 package com.yevini.myvelog.velog;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yevini.myvelog.crawling.SeleniumService;
 import com.yevini.myvelog.redis.JwtService;
-import com.yevini.myvelog.redis.RedisService;
+import com.yevini.myvelog.redis.UserRedisService;
 import com.yevini.myvelog.request.RestTemplateService;
 import com.yevini.myvelog.request.WebClientService;
 import com.yevini.myvelog.response.Posts;
@@ -23,7 +22,7 @@ import java.util.List;
 public class MyvelogService {
 
     private final JwtService jwtService;
-    private final RedisService redisService;
+    private final UserRedisService userRedisService;
     private final SeleniumService seleniumService;
     private final StatService statService;
     private final WebClientService webClientService;
@@ -34,14 +33,14 @@ public class MyvelogService {
         User user = seleniumService.process();
 
         Duration duration = jwtService.getDurationLeft(user.getAccessToken());
-        redisService.set(user, duration);
+        userRedisService.set(user, duration);
 
         return user.getUsername();
     }
 
-    public void main(String username, Model model) throws InterruptedException {
+    public void main(String username, Model model) throws InterruptedException, JsonProcessingException {
 
-        User user = redisService.get(username);
+        User user = userRedisService.get(username);
 
         UserTags userTags = webClientService.getUserTags(username);
         Posts posts = webClientService.getPosts(username, userTags.getTotalPostsCount());
@@ -61,7 +60,7 @@ public class MyvelogService {
 
     public void logout(String username) {
 
-        redisService.delete(username);
+        userRedisService.delete(username);
     }
 
 }
