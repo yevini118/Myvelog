@@ -12,5 +12,5 @@ public class MyvelogStats {
     private int totalPosts;
     private int totalVisits;
     private int totalLikes;
-    private List<PostStats> topPosts;
+    private List<PostStat> topPosts;
 }

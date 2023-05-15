@@ -8,13 +8,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
 public class Posts {
 
-    List<Post> posts;
+    private final List<Post> posts;
+    private LocalDateTime dateTime;
 
     @JsonCreator
     public Posts(@JsonProperty("data") JsonNode node) throws JsonProcessingException {
@@ -23,6 +27,6 @@ public class Posts {
 
         JsonNode postsNode = node.findValue("posts");
 
-        this.posts =  Arrays.stream(objectMapper.treeToValue(postsNode, Post[].class)).toList();
+        this.posts =  Stream.of(objectMapper.treeToValue(postsNode, Post[].class)).collect(Collectors.toList());
     }
 }

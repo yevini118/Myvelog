@@ -5,11 +5,9 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class PostStats {
+public class PostStat {
 
-    private int num;
     private String title;
     private int likes;
     private int visits;
-
 }
