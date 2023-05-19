@@ -1,6 +1,7 @@
 package com.yevini.myvelog.redis;
 
 import com.yevini.myvelog.response.User;
+import com.yevini.myvelog.velog.MyvelogStats;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
@@ -25,12 +26,23 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<String, User> redisTemplate() {
+    public RedisTemplate<String, User> userRedisTemplate() {
 
         RedisTemplate<String, User> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory());
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(User.class));
+
+        return redisTemplate;
+    }
+
+    @Bean
+    public RedisTemplate<String, MyvelogStats> statsRedisTemplate() {
+
+        RedisTemplate<String, MyvelogStats> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(MyvelogStats.class));
 
         return redisTemplate;
     }

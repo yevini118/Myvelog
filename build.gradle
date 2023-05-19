@@ -40,6 +40,8 @@ dependencies {
 
 	implementation 'org.springframework.retry:spring-retry:1.2.5.RELEASE'
 
+	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+
 }
 
 tasks.named('test') {

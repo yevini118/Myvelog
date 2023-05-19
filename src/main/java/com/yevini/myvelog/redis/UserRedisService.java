@@ -14,18 +14,17 @@ public class UserRedisService {
     private final RedisTemplate<String, User> redisTemplate;
     public void set(User user, Duration duration) {
 
-        String key = user.getUsername();
-        redisTemplate.opsForValue().set(key, user, duration);
+        redisTemplate.opsForValue().set(user.getUsername(), user, duration);
     }
 
-    public User get(String key) {
+    public User get(String username) {
 
-        return redisTemplate.opsForValue().get(key);
+        return redisTemplate.opsForValue().get(username);
     }
 
-    public void delete(String key) {
+    public void delete(String username) {
 
-        redisTemplate.delete(key);
+        redisTemplate.delete(username);
     }
 
 }
