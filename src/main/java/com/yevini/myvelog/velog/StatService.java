@@ -6,6 +6,7 @@ import com.yevini.myvelog.response.Stat;
 import com.yevini.myvelog.response.UserTags;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ import static java.util.Comparator.comparing;
 @Service
 public class StatService {
 
-    public MyvelogStats getStat(UserTags userTags, Posts posts, List<Stat> stats) {
+    public MyvelogStats getStat(UserTags userTags, Posts posts, List<Stat> stats, MyvelogStats history) {
 
         int totalVisits = getTotalVisits(stats);
         int totalLikes = getTotalLikes(posts.getPosts());
@@ -25,6 +26,7 @@ public class StatService {
                 .totalVisits(totalVisits)
                 .totalLikes(totalLikes)
                 .topPosts(topPosts)
+                .dateTime(LocalDateTime.now())
                 .build();
     }
 
@@ -53,6 +55,27 @@ public class StatService {
 
         postStats.sort(comparing(PostStat::getVisits).reversed());
 
+        int num=1;
+        for (PostStat postStat : postStats) {
+            postStat.setNum(num++);
+        }
+
         return postStats;
+    }
+
+    private LocalDateTime getHistoryDateTime(MyvelogStats history) {
+
+        if (history != null) {
+            return history.getDateTime();
+        }
+        return LocalDateTime.now();
+    }
+
+    private int getVisitUp(MyvelogStats history, int totalVisits) {
+
+        if (history != null) {
+            return totalVisits - history.getTotalVisits();
+        }
+        return 0;
     }
 }

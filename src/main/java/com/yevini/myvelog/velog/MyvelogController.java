@@ -1,7 +1,6 @@
 package com.yevini.myvelog.velog;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.yevini.myvelog.response.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +33,7 @@ public class MyvelogController {
     @GetMapping("/post/{username}")
     public String post(@PathVariable String username, Model model) {
 
-
+        myvelogService.post(username, model);
         return "post";
     }
 
