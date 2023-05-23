@@ -146,24 +146,35 @@
                 <div class="grid grid-cols-2 gap-6 h-full">
 
                     <div class="card">
-                        <div class="py-3 px-4 flex flex-row justify-between">
+                        <div class="py-3 px-4 flex flex-row justify-between" style="margin-top: 10px;">
                             <h1 class="h6">
                                 <span class="num-4"></span>{{stats.totalLikes}}
                                 <p>총 좋아요</p>
                             </h1>
                             <img src="/img/like.png" alt="img like" style="width: 15%;height: 15%;">
                         </div>
+                        <div class="mt-20 mb-2 flex items-center" style="margin-top: 10px; margin-left: 20px;">
+                            <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: #4fd1c578; ">
+                                <i class="fa fa-caret-up"></i>
+                            </div>
+                            <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: #718096;font-size: small;font-weight: 600;">{{likesUp}}</span></p>
+                        </div>
                         <div class="analytics_1"></div>
                     </div>
 
                     <div class="card">
-                        <div class="py-3 px-4 flex flex-row justify-between">
+                        <div class="py-3 px-4 flex flex-row justify-between" style="margin-top: 10px;">
                             <h1 class="h6">
                                 <span class="num-2">{{stats.totalPosts}}</span>
                                 <p>총 게시글</p>
-
                             </h1>
                             <img src="/img/post.png" alt="img post" style="width: 15%;height: 15%;">
+                        </div>
+                        <div class="mt-20 mb-2 flex items-center" style="margin-top: 10px; margin-left: 20px;">
+                            <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: #4fd1c578;">
+                                <i class="fa fa-caret-up"></i>
+                            </div>
+                            <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: #718096;font-size: small;font-weight: 600;">{{postsUp}}</span></p>
                         </div>
                         <div class="analytics_1"></div>
                     </div>
@@ -178,82 +189,69 @@
         </div>
         <!-- end Analytics -->
 
-        <!-- start quick Info -->
-        <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
-
-            <!-- Start Recent Sales -->
-            <div class="card col-span-3 xl:col-span-1">
-                <div class="card-header">
-                    <h1 class="h6">조회수 순위</h1>
-                </div>
-
-                <table class="table-auto w-full text-left">
-                    <thead>
-                    <tr>
-                        <th class="px-4 py-2 border-r"></th>
-                        <th class="px-4 py-2 border-r">게시글</th>
-                        <th class="px-4 py-2 border-r">좋아요</th>
-                        <th class="px-4 py-2">조회수</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-gray-600">
-
-                    {{ #stats.topPosts }}
-                        <tr>
-                            <td class="border border-l-0 px-4 py-2 text-center"><i>{{num}}</i></td>
-                            <td class="border border-l-0 px-4 py-2">{{title}}</td>
-                            <td class="border border-l-0 px-4 py-2">{{likes}}<span class="num-2"></span></td>
-                            <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
-                        </tr>
-                    {{ /stats.topPosts }}
-
-                    </tbody>
-                </table>
-            </div>
-            <!-- End Recent Sales -->
-
-
-        </div>
-        <!-- end quick Info -->
-
         <!-- Sales Overview -->
-<!--        <div class="card mt-6">-->
+        <div class="card mt-6">
 
             <!-- header -->
-<!--            <div class="card-header flex flex-row justify-between">-->
-<!--                <h1 class="h6">전체 조회수 추이</h1>-->
-<!--            </div>-->
+            <div class="card-header flex flex-row justify-between">
+                <h1 class="h6">2023.05.21</h1>
+
+                <div class="flex flex-row justify-center items-center">
+
+                    <a href="">
+                        <i class="fad fa-chevron-left mr-6"></i>
+                    </a>
+
+                    <a href="">
+                        <i class="fad fa-chevron-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
             <!-- end header -->
 
             <!-- body -->
-<!--            <div class="card-body grid grid-cols-2 gap-6 lg:grid-cols-1">-->
+            <div class="card-body grid grid-cols-2 gap-6 lg:grid-cols-1" style="display: flex; flex-direction: column;">
 
-<!--                <div class="p-8">-->
-<!--                    -->
-<!--                    <div class="mt-20 mb-2 flex items-center">-->
+                <div class="p-8">
+                    <h1 class="h2">3</h1>
+                    <p class="text-black font-medium">조회수</p>
+                </div>
+                <!-- start quick Info -->
+                <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
 
-<!--                        <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3">-->
-<!--                            <i class="fa fa-caret-up"></i>-->
-<!--                        </div>-->
-<!--                        <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400">% more sales</span> in comparison to last month.</p>-->
-<!--                    </div>-->
+                    <!-- Start Recent Sales -->
+                    <div class="card col-span-3 xl:col-span-1">
+                        <div class="card-header">
+                            <h1 class="h6">조회수 순위</h1>
+                        </div>
 
-<!--                    <div class="flex items-center">-->
-<!--                        <div class="py-1 px-3 rounded bg-red-200 text-red-900 mr-3">-->
-<!--                            <i class="fa fa-caret-down"></i>-->
-<!--                        </div>-->
-<!--                        <p class="text-black"><span class="num-2 text-red-400"></span><span class="text-red-400">% revenue per sale</span> in comparison to last month.</p>-->
-<!--                    </div>-->
+                        <table class="table-auto w-full text-left">
+                            <thead>
+                            <tr>
+                                <th class="px-4 py-2 border-r"></th>
+                                <th class="px-4 py-2 border-r">게시글</th>
+                                <th class="px-4 py-2">조회수</th>
+                            </tr>
+                            </thead>
+                            <tbody class="text-gray-600">
 
-<!--                    <a href="#" class="btn-shadow mt-6">view details</a>-->
+                            {{ #new }}
+                            <tr>
+                                <td class="border border-l-0 px-4 py-2 text-center"><i>1</i></td>
+                                <td class="border border-l-0 px-4 py-2">{{title}}</td>
+                                <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
+                            </tr>
+                            {{ /new }}
 
-<!--                </div>-->
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- End Recent Sales -->
 
-<!--                <div class="">-->
-<!--                    <div id="sealsOverview">-->
-<!--                        <canvas id="chartjs-7" class="chartjs" width="undefined" height="undefined"></canvas>-->
-<!--                    </div>-->
-<!--                </div>-->
+                </div>
+                <!-- end quick Info -->
 
             </div>
             <!-- end body -->
