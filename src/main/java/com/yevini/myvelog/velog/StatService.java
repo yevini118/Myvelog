@@ -15,7 +15,7 @@ import static java.util.Comparator.comparing;
 @Service
 public class StatService {
 
-    public MyvelogStats getStat(UserTags userTags, Posts posts, List<Stat> stats, MyvelogStats history) {
+    public MyvelogStats getStat(UserTags userTags, Posts posts, List<Stat> stats) {
 
         int totalVisits = getTotalVisits(stats);
         int totalLikes = getTotalLikes(posts.getPosts());
@@ -50,7 +50,7 @@ public class StatService {
 
         for(int i=0; i<postsSize; i++) {
 
-            postStats.add(new PostStat(posts.get(i).getTitle(), posts.get(i).getLikes(), stats.get(i).getTotal()));
+            postStats.add(new PostStat(posts.get(i).getId(), posts.get(i).getTitle(), posts.get(i).getLikes(), stats.get(i).getTotal(), stats.get(i).getCountByDays()));
         }
 
         postStats.sort(comparing(PostStat::getVisits).reversed());
@@ -78,4 +78,6 @@ public class StatService {
         }
         return 0;
     }
+
+
 }
