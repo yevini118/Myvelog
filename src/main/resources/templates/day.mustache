@@ -34,6 +34,7 @@
                     <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">{{user.username}}</h1>
                     <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
                 </div>
+
             </button>
 
             <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
@@ -107,42 +108,51 @@
     <!-- strat content -->
     <div class="bg-gray-100 flex-1 p-6 md:mt-16">
 
-        <!-- start quick Info -->
-        <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
+        <!-- Start Recent Sales -->
+        <div class="card col-span-3 xl:col-span-1">
+            <div class="card-header" style="display: flex; justify-content: space-between;">
+                <h1 class="h6">2023.05.27</h1>
+                <div class="flex flex-row justify-center items-center" style="display: flex; width: 60px; justify-content: space-around;">
 
-            <!-- Start Recent Sales -->
-            <div class="card col-span-3 xl:col-span-1">
-                <div class="card-header">
-                    <h1 class="h6">조회수 순위</h1>
+                    <a href="">
+                        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                    </a>
+
+                    <a href="">
+                        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                    </a>
+
+                    <a href="">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                    </a>
+
                 </div>
-
-                <table class="table-auto w-full text-left">
-                    <thead>
-                    <tr>
-                        <th class="px-4 py-2 border-r"></th>
-                        <th class="px-4 py-2 border-r">게시글</th>
-                        <th class="px-4 py-2 border-r">좋아요</th>
-                        <th class="px-4 py-2">조회수</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-gray-600">
-
-                    {{ #stats.topPosts }}
-                    <tr>
-                        <td class="border border-l-0 px-4 py-2 text-center"><i>{{num}}</i></td>
-                        <td class="border border-l-0 px-4 py-2">{{title}}</td>
-                        <td class="border border-l-0 px-4 py-2">{{likes}}<span class="num-2"></span></td>
-                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
-                    </tr>
-                    {{ /stats.topPosts }}
-
-                    </tbody>
-                </table>
             </div>
-            <!-- End Recent Sales -->
 
+            <table class="table-auto w-full text-left">
+                <thead>
+                <tr>
+                    <th class="px-4 py-2 border-r"></th>
+                    <th class="px-4 py-2 border-r">게시글</th>
+                    <th class="px-4 py-2 border-r">좋아요</th>
+                    <th class="px-4 py-2">조회수</th>
+                </tr>
+                </thead>
+                <tbody class="text-gray-600">
+
+                {{ #stats.topPosts }}
+                <tr>
+                    <td class="border border-l-0 px-4 py-2 text-center"><i>{{num}}</i></td>
+                    <td class="border border-l-0 px-4 py-2">{{title}}</td>
+                    <td class="border border-l-0 px-4 py-2">{{likes}}<span class="num-2"></span></td>
+                    <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
+                </tr>
+                {{ /stats.topPosts }}
+
+                </tbody>
+            </table>
         </div>
-
+        <!-- End Recent Sales -->
 
     </div>
     <!-- end body -->

@@ -6,19 +6,20 @@ import com.yevini.myvelog.redis.JwtService;
 import com.yevini.myvelog.redis.StatsRedisService;
 import com.yevini.myvelog.redis.UserRedisService;
 import com.yevini.myvelog.request.WebClientService;
-import com.yevini.myvelog.response.*;
+import com.yevini.myvelog.response.Posts;
+import com.yevini.myvelog.response.Stat;
+import com.yevini.myvelog.response.User;
+import com.yevini.myvelog.response.UserTags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -68,18 +69,31 @@ public class MyvelogService {
             postsUp = myvelogStats.getTotalPosts() -statsHistory.getTotalPosts();
         }
 
-        System.out.println(stats.get(0).getCountByDays().get(1));
-
         model.addAttribute("user", user);
         model.addAttribute("stats", myvelogStats);
         model.addAttribute("visitsUp", visitsUp);
+        model.addAttribute("isLikesUp", likesUp >= 0);
         model.addAttribute("likesUp", likesUp);
         model.addAttribute("postsUp", postsUp);
         model.addAttribute("datetime", dateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)));
-        model.addAttribute("new", getPostStatByDate(0, myvelogStats.getTopPosts()));
+        model.addAttribute("new", getNewVisits(statsHistory.getTopPosts(), myvelogStats.getTopPosts()));
+
     }
 
     public void post(String username, Model model) {
+
+        User user = userRedisService.get(username);
+        if (user == null) {
+            throw new IllegalArgumentException();
+        }
+
+        MyvelogStats myvelogStats = statsRedisService.get(username);
+
+        model.addAttribute("user", user);
+        model.addAttribute("stats", myvelogStats);
+    }
+
+    public void day(String username, Model model) {
 
         User user = userRedisService.get(username);
         if (user == null) {
@@ -101,11 +115,35 @@ public class MyvelogService {
 
         List<PostStat> newPostStats = new ArrayList<>();
 
-        postStats.stream()
-                .filter(postStat -> postStat.getCountByDays().get(index).getCount() > 0)
-                .forEach(postStat -> newPostStats.add(new PostStat(postStat, index)));
+        for (PostStat postStat : postStats) {
+            if (postStat.getCountByDays().size() > index) {
+                if (postStat.getCountByDays().get(index).getCount() > 0) {
+                    newPostStats.add(new PostStat(postStat, index));
+                }
+            }
+        }
 
         return newPostStats;
     }
+
+    private List<PostStat> getNewVisits(List<PostStat> postStatsHistory, List<PostStat> postStats) {
+
+        List<PostStat> newList = new ArrayList<>();
+
+        for (PostStat postStat : postStats) {
+            postStatsHistory.stream()
+                    .filter(history -> history.getId().equals(postStat.getId()) && (history.getVisits() != postStat.getVisits() || history.getLikes() != postStat.getLikes()))
+                    .findFirst()
+                    .map(any -> new PostStat(any, postStat.getVisits() - any.getVisits(), postStat.getLikes() - any.getLikes()))
+                    .ifPresent(newList::add);
+        }
+
+        System.out.println(newList.size());
+        for (PostStat postStat : newList) {
+            System.out.println(postStat.toString());
+        }
+        return newList;
+    }
+
 
 }
