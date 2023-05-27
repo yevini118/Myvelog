@@ -34,7 +34,26 @@ public class PostStat {
         this.visits = postStat.getCountByDays().get(index).getCount();
     }
 
+    public PostStat(PostStat postStat, int visitsUp, int likesUp) {
+        this.id = postStat.getId();
+        this.title = postStat.getTitle();
+        this.visits = visitsUp;
+        this.likes = likesUp;
+    }
+
     public void setNum(int num) {
         this.num = num;
+    }
+
+    @Override
+    public String toString() {
+        return "PostStat{" +
+                "num=" + num +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", likes=" + likes +
+                ", visits=" + visits +
+                ", countByDays=" + countByDays +
+                '}';
     }
 }

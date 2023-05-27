@@ -91,6 +91,13 @@
                 Post Rank
             </a>
             <!-- end link -->
+
+            <!-- link -->
+            <a href="/day/{{ user.username }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <i class="fa fa-calendar text-xs mr-2"></i>
+                Visits By Day
+            </a>
+            <!-- end link -->
         </div>
         <!-- end sidebar content -->
 
@@ -184,80 +191,53 @@
 
             </div>
             <!-- end charts -->
-
-
         </div>
         <!-- end Analytics -->
 
-        <!-- Sales Overview -->
-        <div class="card mt-6">
-
-            <!-- header -->
-            <div class="card-header flex flex-row justify-between">
-                <h1 class="h6">2023.05.21</h1>
-
-                <div class="flex flex-row justify-center items-center">
-
-                    <a href="">
-                        <i class="fad fa-chevron-left mr-6"></i>
-                    </a>
-
-                    <a href="">
-                        <i class="fad fa-chevron-right"></i>
-                    </a>
-
-                </div>
-
+        <!-- Start Recent Sales -->
+        <div class="card col-span-3 xl:col-span-1" style="margin-top: 20px;">
+            <div class="card-header">
+                <h1 class="h6">새로운 조회수</h1>
             </div>
-            <!-- end header -->
 
-            <!-- body -->
-            <div class="card-body grid grid-cols-2 gap-6 lg:grid-cols-1" style="display: flex; flex-direction: column;">
+            <table class="table-auto w-full text-left">
+                <thead>
+                <tr>
+                    <th class="px-4 py-2 border-r"></th>
+                    <th class="px-4 py-2 border-r">게시글</th>
+                    <th class="px-4 py-2 border-r">좋아요</th>
+                    <th class="px-4 py-2">조회수</th>
+                </tr>
+                </thead>
+                <tbody class="text-gray-600">
 
-                <div class="p-8">
-                    <h1 class="h2">3</h1>
-                    <p class="text-black font-medium">조회수</p>
-                </div>
-                <!-- start quick Info -->
-                <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
+                {{ ^new }}
+                    <td class="border border-l-0 px-4 py-2 text-center"><i></i></td>
+                    <td class="border border-l-0 px-4 py-2">새로운 조회수가 없어요!</td>
+                    <td class="border border-l-0 px-4 py-2"><span class="num-2"></span></td>
+                    <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span></td>
+                {{ /new }}
+                {{ #new }}
+                <tr>
+                    <td class="border border-l-0 px-4 py-2 text-center"><i>1</i></td>
+                    <td class="border border-l-0 px-4 py-2">{{title}}</td>
+                    <td class="border border-l-0 px-4 py-2">
+                        {{ #isLikesUp }}
+                            <i class="fa fa-caret-up" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
+                        {{ /isLikesUp }}
 
-                    <!-- Start Recent Sales -->
-                    <div class="card col-span-3 xl:col-span-1">
-                        <div class="card-header">
-                            <h1 class="h6">조회수 순위</h1>
-                        </div>
+                        {{ ^isLikesUp }}
+                            <i class="fa fa-caret-down" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
+                        {{ /isLikesUp }}
+                        {{likes}}<span class="num-2"></span></td>
+                    <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span><i class="fa fa-caret-up" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>{{visits}}</td>
+                </tr>
+                {{ /new }}
 
-                        <table class="table-auto w-full text-left">
-                            <thead>
-                            <tr>
-                                <th class="px-4 py-2 border-r"></th>
-                                <th class="px-4 py-2 border-r">게시글</th>
-                                <th class="px-4 py-2">조회수</th>
-                            </tr>
-                            </thead>
-                            <tbody class="text-gray-600">
-
-                            {{ #new }}
-                            <tr>
-                                <td class="border border-l-0 px-4 py-2 text-center"><i>1</i></td>
-                                <td class="border border-l-0 px-4 py-2">{{title}}</td>
-                                <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
-                            </tr>
-                            {{ /new }}
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- End Recent Sales -->
-
-                </div>
-                <!-- end quick Info -->
-
-            </div>
-            <!-- end body -->
-
+                </tbody>
+            </table>
         </div>
-        <!-- end Sales Overview -->
+        <!-- End Recent Sales -->
 
     </div>
     <!-- end content -->

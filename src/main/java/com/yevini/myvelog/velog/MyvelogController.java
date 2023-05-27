@@ -37,6 +37,13 @@ public class MyvelogController {
         return "post";
     }
 
+    @GetMapping("/day/{username}")
+    public String day(@PathVariable String username, Model model) {
+
+        myvelogService.day(username, model);
+        return "day";
+    }
+
     @GetMapping("/login")
     public String login() throws JsonProcessingException {
 
