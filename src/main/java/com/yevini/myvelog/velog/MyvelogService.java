@@ -6,20 +6,22 @@ import com.yevini.myvelog.redis.JwtService;
 import com.yevini.myvelog.redis.StatsRedisService;
 import com.yevini.myvelog.redis.UserRedisService;
 import com.yevini.myvelog.request.WebClientService;
-import com.yevini.myvelog.response.Posts;
-import com.yevini.myvelog.response.Stat;
-import com.yevini.myvelog.response.User;
-import com.yevini.myvelog.response.UserTags;
+import com.yevini.myvelog.response.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import static java.util.Comparator.comparing;
 
 @RequiredArgsConstructor
 @Service
@@ -93,17 +95,26 @@ public class MyvelogService {
         model.addAttribute("stats", myvelogStats);
     }
 
-    public void day(String username, Model model) {
+    public void day(String username, LocalDate date, Model model) {
 
         User user = userRedisService.get(username);
         if (user == null) {
             throw new IllegalArgumentException();
         }
 
+        if(date == null) {
+            date = LocalDate.now();
+        }
+
         MyvelogStats myvelogStats = statsRedisService.get(username);
 
         model.addAttribute("user", user);
-        model.addAttribute("stats", myvelogStats);
+        model.addAttribute("dateB", date.minusDays(1));
+        model.addAttribute("dateA", date.plusDays(1));
+        model.addAttribute("isDateA", date.isEqual(LocalDate.now()));
+        model.addAttribute("date", date);
+        model.addAttribute("today", LocalDate.now());
+        model.addAttribute("stats", getPostStatByDate(date ,myvelogStats.getTopPosts()));
     }
 
     public void logout(String username) {
@@ -111,16 +122,20 @@ public class MyvelogService {
         userRedisService.delete(username);
     }
 
-    private List<PostStat> getPostStatByDate(int index, List<PostStat> postStats) {
+    private List<PostStat> getPostStatByDate(LocalDate date, List<PostStat> postStats) {
 
         List<PostStat> newPostStats = new ArrayList<>();
 
-        for (PostStat postStat : postStats) {
-            if (postStat.getCountByDays().size() > index) {
-                if (postStat.getCountByDays().get(index).getCount() > 0) {
-                    newPostStats.add(new PostStat(postStat, index));
-                }
-            }
+        System.out.println(date);
+//        for (PostStat postStat : postStats) {
+//
+//        }
+
+        newPostStats.sort(comparing(PostStat::getVisits).reversed());
+
+        int num=1;
+        for (PostStat postStat : newPostStats) {
+            postStat.setNum(num++);
         }
 
         return newPostStats;
