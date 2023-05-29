@@ -4,10 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RequiredArgsConstructor
 @Controller
@@ -38,9 +37,9 @@ public class MyvelogController {
     }
 
     @GetMapping("/day/{username}")
-    public String day(@PathVariable String username, Model model) {
+    public String day(@PathVariable String username, @RequestParam(required = false) LocalDate date, Model model) {
 
-        myvelogService.day(username, model);
+        myvelogService.day(username, date, model);
         return "day";
     }
 
