@@ -28,10 +28,10 @@ public class PostStat {
         this.countByDays = countByDays;
     }
 
-    public PostStat(PostStat postStat, int index) {
+    public PostStat(PostStat postStat, int visits) {
         this.id = postStat.getId();
         this.title = postStat.getTitle();
-        this.visits = postStat.getCountByDays().get(index).getCount();
+        this.visits = visits;
     }
 
     public PostStat(PostStat postStat, int visitsUp, int likesUp) {

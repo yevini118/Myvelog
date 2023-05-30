@@ -126,10 +126,13 @@ public class MyvelogService {
 
         List<PostStat> newPostStats = new ArrayList<>();
 
-        System.out.println(date);
-//        for (PostStat postStat : postStats) {
-//
-//        }
+        for (PostStat postStat : postStats) {
+            CountByDay countByDay1 = postStat.getCountByDays().stream().filter(countByDay -> countByDay.getDay().equals(date)).findFirst().orElse(null);
+
+            if (countByDay1 != null) {
+                newPostStats.add(new PostStat(postStat, countByDay1.getCount()));
+            }
+        }
 
         newPostStats.sort(comparing(PostStat::getVisits).reversed());
 
