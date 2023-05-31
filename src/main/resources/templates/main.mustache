@@ -27,11 +27,11 @@
 
             <button class="menu-btn focus:outline-none focus:shadow-outline flex flex-wrap items-center">
                 <div class="w-8 h-8 overflow-hidden rounded-full">
-                    <img class="w-full h-full object-cover" src="{{user.thumbnail}}" >
+                    <img class="w-full h-full object-cover" src="{{User.thumbnail}}" >
                 </div>
 
                 <div class="ml-2 capitalize flex ">
-                    <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">{{user.username}}</h1>
+                    <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">{{User.username}}</h1>
                     <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
                 </div>
             </button>
@@ -42,7 +42,7 @@
                 <hr>
 
                 <!-- item -->
-                <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="/logout/{{user.username}}">
+                <a class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out" href="/logout/{{User.username}}">
                     <i class="fad fa-user-times text-xs mr-1"></i>
                     log out
                 </a>
@@ -79,21 +79,21 @@
             <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">홈</p>
 
             <!-- link -->
-            <a href="/main/{{ user.username }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <a href="/main/{{User.username }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
                 <i class="fad fa-chart-pie text-xs mr-2"></i>
                 MyVelog Dashboard
             </a>
             <!-- end link -->
 
             <!-- link -->
-            <a href="/post/{{ user.username }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <a href="/post/{{User.username }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
                 <i class="fad fa-trophy-alt text-xs mr-2"></i>
                 Post Rank
             </a>
             <!-- end link -->
 
             <!-- link -->
-            <a href="/day/{{ user.username }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+            <a href="/day/{{User.username }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
                 <i class="fa fa-calendar text-xs mr-2"></i>
                 Visits By Day
             </a>
@@ -112,7 +112,7 @@
 
             <!-- update section -->
             <div class="card bg-teal-400 border-teal-400 shadow-md text-white">
-                <div class="card-body flex flex-row">
+                <div class="card-body flex flex-row" style="align-items: center;">
 
                     <!-- image -->
                     <div class="img-wrapper w-40 h-40 flex justify-center items-center">
@@ -129,9 +129,9 @@
                             <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: white;">
                                 <i class="fa fa-caret-up"></i>
                             </div>
-                            <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: white;font-size: x-large;font-weight: 600;">{{visitsUp}}</span></p>
+                            <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: white;font-size: x-large;font-weight: 600;">{{news.visitsUp}}</span></p>
                         </div>
-                        <p class="text-white text-xs" style="font-size: small; font-weight: 600;">{{datetime}} 로부터</p>
+                        <p class="text-white text-xs" style="font-size: small; font-weight: 600;">{{news.historyDateTime}} 로부터</p>
                     </div>
                     <!-- end info -->
 
@@ -145,7 +145,7 @@
                 <!-- alert -->
                 <div class="alert alert-dark mb-6">
                     내 벨로그 가기
-                    <a class="ml-2" target="_blank" href="https://velog.io/@{{user.username}}">@{{user.username}}</a>
+                    <a class="ml-2" target="_blank" href="https://velog.io/@{{User.username}}">@{{User.username}}</a>
                 </div>
                 <!-- end alert -->
 
@@ -164,7 +164,7 @@
                             <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: #4fd1c578; ">
                                 <i class="fa fa-caret-up"></i>
                             </div>
-                            <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: #718096;font-size: small;font-weight: 600;">{{likesUp}}</span></p>
+                            <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: #718096;font-size: small;font-weight: 600;">{{news.likesUp}}</span></p>
                         </div>
                         <div class="analytics_1"></div>
                     </div>
@@ -181,7 +181,7 @@
                             <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: #4fd1c578;">
                                 <i class="fa fa-caret-up"></i>
                             </div>
-                            <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: #718096;font-size: small;font-weight: 600;">{{postsUp}}</span></p>
+                            <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: #718096;font-size: small;font-weight: 600;">{{news.postsUp}}</span></p>
                         </div>
                         <div class="analytics_1"></div>
                     </div>
@@ -211,15 +211,15 @@
                 </thead>
                 <tbody class="text-gray-600">
 
-                {{ ^new }}
+                {{ ^news.newPostStats }}
                     <td class="border border-l-0 px-4 py-2 text-center"><i></i></td>
                     <td class="border border-l-0 px-4 py-2">새로운 조회수가 없어요!</td>
                     <td class="border border-l-0 px-4 py-2"><span class="num-2"></span></td>
                     <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span></td>
-                {{ /new }}
-                {{ #new }}
+                {{ /news.newPostStats }}
+                {{ #news.newPostStats }}
                 <tr>
-                    <td class="border border-l-0 px-4 py-2 text-center"><i>1</i></td>
+                    <td class="border border-l-0 px-4 py-2 text-center"><i>{{num}}</i></td>
                     <td class="border border-l-0 px-4 py-2">{{title}}</td>
                     <td class="border border-l-0 px-4 py-2">
                         {{ #isLikesUp }}
@@ -232,7 +232,7 @@
                         {{likes}}<span class="num-2"></span></td>
                     <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span><i class="fa fa-caret-up" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>{{visits}}</td>
                 </tr>
-                {{ /new }}
+                {{ /news.newPostStats }}
 
                 </tbody>
             </table>
@@ -244,5 +244,8 @@
 
 </div>
 <!-- end wrapper -->
+<script>
+
+</script>
 
 {{>layout/footer}}

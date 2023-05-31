@@ -20,18 +20,18 @@ public class MyvelogStats {
     private int totalPosts;
     private int totalVisits;
     private int totalLikes;
-    private List<PostStat> topPosts;
+    private List<PostStat> postStats;
 
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     private LocalDateTime dateTime;
 
     @Builder
-    public MyvelogStats(int totalPosts, int totalVisits, int totalLikes, List<PostStat> topPosts, LocalDateTime dateTime) {
+    public MyvelogStats(int totalPosts, int totalVisits, int totalLikes, List<PostStat> postStats, LocalDateTime dateTime) {
         this.totalPosts = totalPosts;
         this.totalVisits = totalVisits;
         this.totalLikes = totalLikes;
-        this.topPosts = topPosts;
+        this.postStats = postStats;
         this.dateTime = dateTime;
     }
 }

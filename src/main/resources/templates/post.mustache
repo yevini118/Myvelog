@@ -104,13 +104,13 @@
     </div>
     <!-- end sidbar -->
 
-    <!-- strat content -->
+    <!-- start content -->
     <div class="bg-gray-100 flex-1 p-6 md:mt-16">
 
         <!-- start quick Info -->
         <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
 
-            <!-- Start Recent Sales -->
+            <!-- Start Recent Visits -->
             <div class="card col-span-3 xl:col-span-1">
                 <div class="card-header">
                     <h1 class="h6">조회수 순위</h1>
@@ -127,31 +127,25 @@
                     </thead>
                     <tbody class="text-gray-600">
 
-                    {{ #stats.topPosts }}
+                    {{ #stats }}
                     <tr>
-                        <td class="border border-l-0 px-4 py-2 text-center"><i>{{num}}</i></td>
+                        <td class="border border-l-0 px-4 py-2 text-center"><i id="index">1</i></td>
                         <td class="border border-l-0 px-4 py-2">{{title}}</td>
                         <td class="border border-l-0 px-4 py-2">{{likes}}<span class="num-2"></span></td>
                         <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
                     </tr>
-                    {{ /stats.topPosts }}
+                    {{ /stats }}
 
                     </tbody>
                 </table>
             </div>
-            <!-- End Recent Sales -->
+            <!-- End Recent Visits -->
 
         </div>
-
+        <!-- End quick Info -->
 
     </div>
-    <!-- end body -->
-
-</div>
-<!-- end Sales Overview -->
-
-</div>
-<!-- end content -->
+    <!-- end content -->
 
 </div>
 <!-- end wrapper -->

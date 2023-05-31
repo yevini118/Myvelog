@@ -139,17 +139,37 @@
                             <i class="fa fa-check" aria-hidden="true"></i>
                         </button>
                     </form>
+                </div>
+            </div>
+
+            <!-- update section -->
+            <div class="card bg-teal-400 border-teal-400 shadow-md text-white" style="margin: 10px;">
+                <div class="card-body flex flex-row" style="padding: 10px; align-items: center;">
+
+                    <!-- image -->
+                    <div class="img-wrapper w-40 h-40 flex justify-center items-center">
+                        <img src="/img/total.png" alt="img title" style="width: 80%">
+                    </div>
+                    <!-- end image -->
+
+                    <!-- info -->
+                    <div class="py-2 ml-10">
+                        <h1 class="h6" style="margin-bottom: 3px;">총 조회수</h1>
+                        <p class="text-white text-xs">이 날의 게시글들의 총 조회수는</p>
+                        <h1 class="h4" style="margin-top: 15px;">{{total}}개</h1>
+                    </div>
+                    <!-- end info -->
 
                 </div>
             </div>
+            <!-- end update section -->
 
             <table class="table-auto w-full text-left">
                 <thead>
                 <tr>
-                    <th class="px-4 py-2 border-r"></th>
-                    <th class="px-4 py-2 border-r">게시글</th>
-                    <th class="px-4 py-2 border-r">좋아요</th>
-                    <th class="px-4 py-2">조회수</th>
+                    <th class="px-4 py-2 border-r border-t" ></th>
+                    <th class="px-4 py-2 border-r border-t">게시글</th>
+                    <th class="px-4 py-2 border-t">조회수</th>
                 </tr>
                 </thead>
                 <tbody class="text-gray-600">
@@ -158,7 +178,6 @@
                 <tr>
                     <td class="border border-l-0 px-4 py-2 text-center" id="index">{{num}}</td>
                     <td class="border border-l-0 px-4 py-2">{{title}}</td>
-                    <td class="border border-l-0 px-4 py-2">{{likes}}<span class="num-2"></span></td>
                     <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
                 </tr>
 

@@ -1,7 +1,6 @@
 package com.yevini.myvelog.velog;
 
-import com.yevini.myvelog.response.CountByDay;
-import lombok.AllArgsConstructor;
+import com.yevini.myvelog.web.dto.response.CountByDay;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,17 +42,5 @@ public class PostStat {
 
     public void setNum(int num) {
         this.num = num;
-    }
-
-    @Override
-    public String toString() {
-        return "PostStat{" +
-                "num=" + num +
-                ", id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", likes=" + likes +
-                ", visits=" + visits +
-                ", countByDays=" + countByDays +
-                '}';
     }
 }
