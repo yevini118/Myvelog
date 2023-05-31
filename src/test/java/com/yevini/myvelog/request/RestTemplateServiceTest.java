@@ -1,7 +1,8 @@
 package com.yevini.myvelog.request;
 
-import com.yevini.myvelog.response.Posts;
-import com.yevini.myvelog.response.UserTags;
+import com.yevini.myvelog.web.dto.response.Posts;
+import com.yevini.myvelog.web.dto.response.UserTags;
+import com.yevini.myvelog.web.service.RestTemplateService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

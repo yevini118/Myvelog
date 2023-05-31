@@ -1,7 +1,9 @@
 package com.yevini.myvelog.request;
 
-import com.yevini.myvelog.response.Post;
-import com.yevini.myvelog.response.Stat;
+import com.yevini.myvelog.web.dto.response.Post;
+import com.yevini.myvelog.web.dto.response.Stat;
+import com.yevini.myvelog.web.service.RestTemplateService;
+import com.yevini.myvelog.web.service.WebClientService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
