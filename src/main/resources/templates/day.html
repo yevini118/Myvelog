@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Header fragment-->
+<th:block th:replace="~{layout/header :: header}"></th:block>
+
+<body class="bg-gray-100">
+
+    <!--Navbar fragment-->
+    <th:block th:replace="~{layout/navbar :: navbar}"></th:block>
+
+    <!-- strat wrapper -->
+    <div class="h-screen flex flex-row flex-wrap">
+
+        <!--Sidebar fragment-->
+        <th:block th:replace="~{layout/sidebar :: sidebar}"></th:block>
+
+        <!-- strat content -->
+        <div class="bg-gray-100 flex-1 p-6 md:mt-16">
+
+            <!-- Start Recent Sales -->
+            <div class="card col-span-3 xl:col-span-1">
+                <div class="card-header" style="display: flex; justify-content: space-between;">
+                    <div class="flex" style="width: 200px; justify-content: space-evenly; align-items: center;">
+                        <form>
+                            <input type="hidden" value="{{dateB}}" name="date">
+                            <button type="submit">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                        <h1 class="h6">{{date}}</h1>
+                        {{ # isDateA }}
+                        <i class="fa fa-chevron-right" aria-hidden="true" style="color: lightgray;"></i>
+                        {{ / isDateA }}
+                        {{ ^ isDateA }}
+                        <form>
+                            <input type="hidden" value="{{dateA}}" name="date">
+                            <button type="submit">
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                        {{ / isDateA }}
+                    </div>
+                    <div class="flex flex-row justify-center items-center">
+
+                        <form class="flex" style="width: 145px; justify-content: space-between;">
+                            <input id="input_date" type="date" max="{{today}}" required name="date">
+                            <button type="submit">
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- update section -->
+                <div class="card bg-teal-400 border-teal-400 shadow-md text-white" style="margin: 10px;">
+                    <div class="card-body flex flex-row" style="padding: 10px; align-items: center;">
+
+                        <!-- image -->
+                        <div class="img-wrapper w-40 h-40 flex justify-center items-center">
+                            <img src="/img/total.png" alt="img title" style="width: 80%">
+                        </div>
+                        <!-- end image -->
+
+                        <!-- info -->
+                        <div class="py-2 ml-10">
+                            <h1 class="h6" style="margin-bottom: 3px;">총 조회수</h1>
+                            <p class="text-white text-xs">이 날의 게시글들의 총 조회수는</p>
+                            <h1 class="h4" style="margin-top: 15px;">{{total}}개</h1>
+                        </div>
+                        <!-- end info -->
+
+                    </div>
+                </div>
+                <!-- end update section -->
+
+                <table class="table-auto w-full text-left">
+                    <thead>
+                    <tr>
+                        <th class="px-4 py-2 border-r border-t" ></th>
+                        <th class="px-4 py-2 border-r border-t">게시글</th>
+                        <th class="px-4 py-2 border-t">조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-gray-600">
+
+                    {{ #stats }}
+                    <tr>
+                        <td class="border border-l-0 px-4 py-2 text-center" id="index">{{num}}</td>
+                        <td class="border border-l-0 px-4 py-2">{{title}}</td>
+                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
+                    </tr>
+
+                    {{ /stats }}
+
+                    </tbody>
+                </table>
+
+            </div>
+            <!-- End Recent Sales -->
+
+        </div>
+        <!-- end content -->
+
+    </div>
+    <!-- end wrapper -->
+
+    <!--Footer fragment-->
+    <th:block th:replace="~{layout/footer :: footer}"></th:block>
+
+</body>
+</html>

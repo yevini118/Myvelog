@@ -42,7 +42,7 @@ public class StatService {
                 .visitsUp(myvelogStats.getTotalVisits() - statsHistory.getTotalVisits())
                 .likesUp(myvelogStats.getTotalLikes() - statsHistory.getTotalLikes())
                 .postsUp(myvelogStats.getTotalPosts() - statsHistory.getTotalPosts())
-                .newPostStats(getNewVisits(statsHistory.getPostStats(), myvelogStats.getPostStats()))
+                .postStats(getNewVisits(statsHistory.getPostStats(), myvelogStats.getPostStats()))
                 .build();
     }
 
@@ -79,6 +79,8 @@ public class StatService {
 
         stats.sort(comparing(Stat::getId));
         posts.sort(comparing(Post::getId));
+
+        System.out.println(stats.size() == posts.size());
 
         List<PostStat> postStats = new ArrayList<>();
 
