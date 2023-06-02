@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!--Header fragment-->
+<th:block th:replace="~{layout/header :: header}"></th:block>
+
+<body class="bg-gray-100">
+
+    <!--Navbar fragment-->
+    <th:block th:replace="~{layout/navbar :: navbar}"></th:block>
+
+    <!-- strat wrapper -->
+    <div class="h-screen flex flex-row flex-wrap">
+
+        <!--Sidebar fragment-->
+        <th:block th:replace="~{layout/sidebar :: sidebar}"></th:block>
+
+        <!-- strat content -->
+        <div class="bg-gray-100 flex-1 p-6 md:mt-16">
+
+            <!-- strat Analytics -->
+            <div class="mt-6 grid grid-cols-2 gap-6 xl:grid-cols-1">
+
+                <!-- update section -->
+                <div class="card bg-teal-400 border-teal-400 shadow-md text-white">
+                    <div class="card-body flex flex-row" style="align-items: center;">
+
+                        <!-- image -->
+                        <div class="img-wrapper w-40 h-40 flex justify-center items-center">
+                            <img src="/img/total.png" alt="img title">
+                        </div>
+                        <!-- end image -->
+
+                        <!-- info -->
+                        <div class="py-2 ml-10">
+                            <h1 class="h6">내 벨로그 총 조회수</h1>
+                            <p class="text-white text-xs">와우! 지금까지 게시글들의 총 조회수가 무려</p>
+                            <h1 class="h2" th:text="|${stats.totalVisits}개|"></h1>
+                            <div class="mt-20 mb-2 flex items-center" style="margin-top: 10px">
+                                <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: white;">
+                                    <i class="fa fa-caret-up"></i>
+                                </div>
+                                <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: white;font-size: x-large;font-weight: 600;" th:text="${news.visitsUp}"></span></p>
+                            </div>
+                            <p class="text-white text-xs" style="font-size: small; font-weight: 600;" th:text="|${news.historyDateTime}로부터|"></p>
+                        </div>
+                        <!-- end info -->
+
+                    </div>
+                </div>
+                <!-- end update section -->
+
+                <!-- carts -->
+                <div class="flex flex-col">
+
+                    <!-- alert -->
+                    <div class="alert alert-dark mb-6">
+                        내 벨로그 가기
+                        <a class="ml-2" target="_blank" th:href="@{'https://velog.io/@' + ${user.username}}" th:text="'@' + ${user.username}"></a>
+                    </div>
+                    <!-- end alert -->
+
+                    <!-- charts -->
+                    <div class="grid grid-cols-2 gap-6 h-full">
+
+                        <div class="card">
+                            <div class="py-3 px-4 flex flex-row justify-between" style="margin-top: 10px;">
+                                <h1 class="h6">
+                                    <span class="num-4" th:text="${stats.totalLikes}"></span>
+                                    <p>총 좋아요</p>
+                                </h1>
+                                <img src="/img/like.png" alt="img like" style="width: 15%;height: 15%;">
+                            </div>
+                            <div class="mt-20 mb-2 flex items-center" style="margin-top: 10px; margin-left: 20px;">
+                                <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: #4fd1c578; ">
+                                    <i th:class="${news.likesUp >= 0} ? 'fa fa-caret-up' : 'fa fa-caret-down'"></i>
+                                </div>
+                                <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: #718096;font-size: small;font-weight: 600;" th:text="${news.likesUp}"></span></p>
+                            </div>
+                            <div class="analytics_1"></div>
+                        </div>
+
+                        <div class="card">
+                            <div class="py-3 px-4 flex flex-row justify-between" style="margin-top: 10px;">
+                                <h1 class="h6">
+                                    <span class="num-2" th:text="${stats.totalPosts}"></span>
+                                    <p>총 게시글</p>
+                                </h1>
+                                <img src="/img/post.png" alt="img post" style="width: 15%;height: 15%;">
+                            </div>
+                            <div class="mt-20 mb-2 flex items-center" style="margin-top: 10px; margin-left: 20px;">
+                                <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: #4fd1c578;">
+                                    <i class="fa fa-caret-up"></i>
+                                </div>
+                                <p class="text-black"><span class="num-2 text-green-400"></span><span class="text-green-400" style="color: #718096;font-size: small;font-weight: 600;" th:text="${news.postsUp}"></span></p>
+                            </div>
+                            <div class="analytics_1"></div>
+                        </div>
+
+                    </div>
+                    <!-- charts    -->
+
+                </div>
+                <!-- end charts -->
+            </div>
+            <!-- end Analytics -->
+
+            <!-- Start Recent Sales -->
+            <div class="card col-span-3 xl:col-span-1" style="margin-top: 20px;">
+                <div class="card-header">
+                    <h1 class="h6">새로운 조회수</h1>
+                </div>
+
+                <table class="table-auto w-full text-left">
+                    <thead>
+                    <tr>
+                        <th class="px-4 py-2 border-r"></th>
+                        <th class="px-4 py-2 border-r">게시글</th>
+                        <th class="px-4 py-2 border-r">좋아요</th>
+                        <th class="px-4 py-2">조회수</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-gray-600">
+
+                    <tr th:if="${#lists.isEmpty(news.postStats)}">
+                        <td class="border border-l-0 px-4 py-2 text-center"><i></i></td>
+                        <td class="border border-l-0 px-4 py-2">새로운 조회수가 없어요!</td>
+                        <td class="border border-l-0 px-4 py-2"><span class="num-2"></span></td>
+                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span></td>
+                    </tr>
+
+                    <tr th:each="postStat : ${news.postStats}">
+                        <td class="border border-l-0 px-4 py-2 text-center" th:text="${postStatStat.count}"></td>
+                        <td class="border border-l-0 px-4 py-2" th:text="${postStat.title}"></td>
+                        <td class="border border-l-0 px-4 py-2">
+                            <i th:class="${news.likesUp >= 0} ? 'fa fa-caret-up' : 'fa fa-caret-down'" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
+                            [[${postStat.likes}]]
+                        </td>
+                        <td class="border border-l-0 border-r-0 px-4 py-2">
+                            <i class="fa fa-caret-up" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
+                            [[${postStat.visits}]]
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <!-- End Recent Sales -->
+
+        </div>
+        <!-- end content -->
+
+    </div>
+    <!-- end wrapper -->
+
+    <!--Footer fragment-->
+    <th:block th:replace="~{layout/footer :: footer}"></th:block>
+
+</body>
+</html>

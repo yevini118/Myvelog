@@ -31,10 +31,10 @@ public class MyvelogController {
 
         User user = userService.getUser(username);
         MainResponseDto responseDto = myvelogService.main(username, user.getAccessToken());
-        model.addAttribute("User", user);
+
+        model.addAttribute("user", user);
         model.addAttribute("stats", responseDto.getMyvelogStats());
         model.addAttribute("news", responseDto.getNews());
-        model.addAttribute("isLikesUp", responseDto.isLikesUp());
 
         return "main";
     }
