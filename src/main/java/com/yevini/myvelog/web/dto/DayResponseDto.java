@@ -27,4 +27,8 @@ public class DayResponseDto {
         this.postStats = postStats;
         this.totalVisits = postStats.stream().mapToInt(PostStat::getVisits).sum();
     }
+
+    public boolean isToday() {
+        return isToday;
+    }
 }

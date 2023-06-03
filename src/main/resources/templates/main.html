@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <!--Header fragment-->
 <th:block th:replace="~{layout/header :: header}"></th:block>
@@ -9,19 +9,19 @@
     <!--Navbar fragment-->
     <th:block th:replace="~{layout/navbar :: navbar}"></th:block>
 
-    <!-- strat wrapper -->
+    <!-- Start wrapper -->
     <div class="h-screen flex flex-row flex-wrap">
 
         <!--Sidebar fragment-->
         <th:block th:replace="~{layout/sidebar :: sidebar}"></th:block>
 
-        <!-- strat content -->
+        <!-- Start content -->
         <div class="bg-gray-100 flex-1 p-6 md:mt-16">
 
-            <!-- strat Analytics -->
+            <!-- Start Analytics -->
             <div class="mt-6 grid grid-cols-2 gap-6 xl:grid-cols-1">
 
-                <!-- update section -->
+                <!-- Start total visits -->
                 <div class="card bg-teal-400 border-teal-400 shadow-md text-white">
                     <div class="card-body flex flex-row" style="align-items: center;">
 
@@ -48,21 +48,22 @@
 
                     </div>
                 </div>
-                <!-- end update section -->
+                <!-- End total visits -->
 
-                <!-- carts -->
+                <!-- Start stats -->
                 <div class="flex flex-col">
 
-                    <!-- alert -->
+                    <!-- velog -->
                     <div class="alert alert-dark mb-6">
                         내 벨로그 가기
                         <a class="ml-2" target="_blank" th:href="@{'https://velog.io/@' + ${user.username}}" th:text="'@' + ${user.username}"></a>
                     </div>
-                    <!-- end alert -->
+                    <!-- end velog -->
 
-                    <!-- charts -->
+                    <!-- totals -->
                     <div class="grid grid-cols-2 gap-6 h-full">
 
+                        <!-- likes -->
                         <div class="card">
                             <div class="py-3 px-4 flex flex-row justify-between" style="margin-top: 10px;">
                                 <h1 class="h6">
@@ -79,7 +80,9 @@
                             </div>
                             <div class="analytics_1"></div>
                         </div>
+                        <!-- end likes -->
 
+                        <!-- posts -->
                         <div class="card">
                             <div class="py-3 px-4 flex flex-row justify-between" style="margin-top: 10px;">
                                 <h1 class="h6">
@@ -96,16 +99,17 @@
                             </div>
                             <div class="analytics_1"></div>
                         </div>
+                        <!-- end posts -->
 
                     </div>
-                    <!-- charts    -->
-
+                    <!-- end totals -->
                 </div>
-                <!-- end charts -->
+                <!-- End stats -->
+
             </div>
             <!-- end Analytics -->
 
-            <!-- Start Recent Sales -->
+            <!-- Start news -->
             <div class="card col-span-3 xl:col-span-1" style="margin-top: 20px;">
                 <div class="card-header">
                     <h1 class="h6">새로운 조회수</h1>
@@ -123,10 +127,10 @@
                     <tbody class="text-gray-600">
 
                     <tr th:if="${#lists.isEmpty(news.postStats)}">
-                        <td class="border border-l-0 px-4 py-2 text-center"><i></i></td>
+                        <td class="border border-l-0 px-4 py-2 text-center"></td>
                         <td class="border border-l-0 px-4 py-2">새로운 조회수가 없어요!</td>
-                        <td class="border border-l-0 px-4 py-2"><span class="num-2"></span></td>
-                        <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span></td>
+                        <td class="border border-l-0 px-4 py-2"></td>
+                        <td class="border border-l-0 border-r-0 px-4 py-2"></td>
                     </tr>
 
                     <tr th:each="postStat : ${news.postStats}">
@@ -145,7 +149,7 @@
                     </tbody>
                 </table>
             </div>
-            <!-- End Recent Sales -->
+            <!-- End news -->
 
         </div>
         <!-- end content -->
