@@ -43,7 +43,7 @@ public class MyvelogController {
     public String post(@PathVariable String username, Model model) {
 
         model.addAttribute("user", userService.getUser(username));
-        model.addAttribute("stats", myvelogService.post(username).getPostStats());
+        model.addAttribute("post", myvelogService.post(username));
 
         return "post";
     }
@@ -51,8 +51,8 @@ public class MyvelogController {
     @GetMapping("/day/{username}")
     public String day(@PathVariable String username, @RequestParam(required = false) LocalDate date, Model model) {
 
-        model.addAttribute("User", userService.getUser(username));
-        model.addAttribute("Day",myvelogService.day(username, date));
+        model.addAttribute("user", userService.getUser(username));
+        model.addAttribute("day",myvelogService.day(username, date));
 
         return "day";
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lagn="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <!--Header fragment-->
 <th:block th:replace="~{layout/header :: header}"></th:block>
@@ -9,19 +9,19 @@
     <!--Navbar fragment-->
     <th:block th:replace="~{layout/navbar :: navbar}"></th:block>
 
-    <!-- strat wrapper -->
+    <!-- Start wrapper -->
     <div class="h-screen flex flex-row flex-wrap">
 
         <!--Sidebar fragment-->
         <th:block th:replace="~{layout/sidebar :: sidebar}"></th:block>
 
-        <!-- start content -->
+        <!-- Start content -->
         <div class="bg-gray-100 flex-1 p-6 md:mt-16">
 
-            <!-- start quick Info -->
+            <!-- Start stats -->
             <div class="grid grid-cols-3 gap-6 mt-6 xl:grid-cols-1">
 
-                <!-- Start Recent Visits -->
+                <!-- Start visits -->
                 <div class="card col-span-3 xl:col-span-1">
                     <div class="card-header">
                         <h1 class="h6">조회수 순위</h1>
@@ -38,28 +38,26 @@
                         </thead>
                         <tbody class="text-gray-600">
 
-                        {{ #stats }}
-                        <tr>
-                            <td class="border border-l-0 px-4 py-2 text-center"><i id="index">1</i></td>
-                            <td class="border border-l-0 px-4 py-2">{{title}}</td>
-                            <td class="border border-l-0 px-4 py-2">{{likes}}<span class="num-2"></span></td>
-                            <td class="border border-l-0 border-r-0 px-4 py-2"><span class="num-2"></span>{{visits}}</td>
+                        <tr th:each="postStat : ${post.postStats}">
+                            <td class="border border-l-0 px-4 py-2 text-center" th:text="${postStatStat.count}"></td>
+                            <td class="border border-l-0 px-4 py-2" th:text="${postStat.title}"></td>
+                            <td class="border border-l-0 px-4 py-2" th:text="${postStat.likes}"></td>
+                            <td class="border border-l-0 border-r-0 px-4 py-2" th:text="${postStat.visits}"></td>
                         </tr>
-                        {{ /stats }}
 
                         </tbody>
                     </table>
                 </div>
-                <!-- End Recent Visits -->
+                <!-- End visits -->
 
             </div>
-            <!-- End quick Info -->
+            <!-- End stats -->
 
         </div>
-        <!-- end content -->
+        <!-- End content -->
 
     </div>
-    <!-- end wrapper -->
+    <!-- End wrapper -->
 
     <!--Footer fragment-->
     <th:block th:replace="~{layout/footer :: footer}"></th:block>
