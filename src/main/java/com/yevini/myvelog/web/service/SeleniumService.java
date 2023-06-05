@@ -2,8 +2,8 @@ package com.yevini.myvelog.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yevini.myvelog.web.dto.response.CurrentUser;
-import com.yevini.myvelog.web.dto.response.User;
+import com.yevini.myvelog.model.response.CurrentUser;
+import com.yevini.myvelog.model.velog.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.TimeoutException;
@@ -31,7 +31,7 @@ public class SeleniumService{
     public User process() throws JsonProcessingException {
 
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\USER\\Downloads\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\yevin\\Downloads\\chromedriver.exe");
 
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);

@@ -1,4 +1,4 @@
-package com.yevini.myvelog.velog;
+package com.yevini.myvelog.model.velog;
 
 import lombok.Builder;
 import lombok.Getter;

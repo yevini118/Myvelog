@@ -3,7 +3,7 @@ package com.yevini.myvelog.web.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yevini.myvelog.util.JwtUtil;
 import com.yevini.myvelog.util.redis.UserRedisUtil;
-import com.yevini.myvelog.web.dto.response.User;
+import com.yevini.myvelog.model.velog.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

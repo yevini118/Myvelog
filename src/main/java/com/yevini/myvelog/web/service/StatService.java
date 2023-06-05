@@ -1,9 +1,9 @@
 package com.yevini.myvelog.web.service;
 
-import com.yevini.myvelog.velog.MyvelogStats;
-import com.yevini.myvelog.velog.News;
-import com.yevini.myvelog.velog.PostStat;
-import com.yevini.myvelog.web.dto.response.*;
+import com.yevini.myvelog.model.response.*;
+import com.yevini.myvelog.model.velog.MyvelogStats;
+import com.yevini.myvelog.model.velog.News;
+import com.yevini.myvelog.model.velog.PostStat;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -60,8 +60,6 @@ public class StatService {
 
         newPostStats.sort(comparing(PostStat::getVisits).reversed());
 
-        setNums(newPostStats);
-
         return newPostStats;
     }
 
@@ -80,8 +78,6 @@ public class StatService {
         stats.sort(comparing(Stat::getId));
         posts.sort(comparing(Post::getId));
 
-        System.out.println(stats.size() == posts.size());
-
         List<PostStat> postStats = new ArrayList<>();
 
         int postsSize = posts.size();
@@ -96,7 +92,6 @@ public class StatService {
         }
 
         postStats.sort(comparing(PostStat::getVisits).reversed());
-        setNums(postStats);
 
         return postStats;
     }
@@ -115,15 +110,6 @@ public class StatService {
 
         newList.sort(comparing(PostStat::getVisits).reversed());
 
-        setNums(newList);
-
         return newList;
-    }
-
-    private void setNums(List<PostStat> postStats) {
-        int num=1;
-        for (PostStat postStat : postStats) {
-            postStat.setNum(num++);
-        }
     }
 }

@@ -1,4 +1,4 @@
-package com.yevini.myvelog.velog;
+package com.yevini.myvelog.model.velog;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -15,7 +15,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 public class MyvelogStats {
-
 
     private int totalPosts;
     private int totalVisits;

@@ -1,7 +1,7 @@
 package com.yevini.myvelog.config;
 
-import com.yevini.myvelog.web.dto.response.User;
-import com.yevini.myvelog.velog.MyvelogStats;
+import com.yevini.myvelog.model.velog.User;
+import com.yevini.myvelog.model.velog.MyvelogStats;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;

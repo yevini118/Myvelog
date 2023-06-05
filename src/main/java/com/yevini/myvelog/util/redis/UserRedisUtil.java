@@ -1,6 +1,6 @@
 package com.yevini.myvelog.util.redis;
 
-import com.yevini.myvelog.web.dto.response.User;
+import com.yevini.myvelog.model.velog.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
