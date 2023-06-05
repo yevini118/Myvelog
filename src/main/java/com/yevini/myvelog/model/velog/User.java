@@ -1,5 +1,6 @@
-package com.yevini.myvelog.web.dto.response;
+package com.yevini.myvelog.model.velog;
 
+import com.yevini.myvelog.model.response.CurrentUser;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

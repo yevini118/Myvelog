@@ -1,6 +1,6 @@
-package com.yevini.myvelog.velog;
+package com.yevini.myvelog.model.velog;
 
-import com.yevini.myvelog.web.dto.response.CountByDay;
+import com.yevini.myvelog.model.response.CountByDay;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,6 @@ import java.util.List;
 @Getter
 public class PostStat {
 
-    private int num;
     private String id;
     private String title;
     private int likes;
@@ -38,9 +37,5 @@ public class PostStat {
         this.title = postStat.getTitle();
         this.visits = visitsUp;
         this.likes = likesUp;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
     }
 }

@@ -1,4 +1,4 @@
-package com.yevini.myvelog.web.dto.response;
+package com.yevini.myvelog.model.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

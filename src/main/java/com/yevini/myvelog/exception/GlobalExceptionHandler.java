@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = TimeoutException.class)
     public String handleTimeoutException(Exception e, Model model) {
-        log.info("[TimeoutException]");
+        log.info("[TimeoutException] login timeout");
         model.addAttribute("timeout", true);
         return "index";
     }
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = IllegalArgumentException.class)
     public String handleIllegalArgumentException(Exception e, Model model) {
-        log.error("IllegalArgumentException");
+        log.error("[IllegalArgumentException] no user");
 
         model.addAttribute("logout", true);
         return "index";

@@ -1,7 +1,7 @@
 package com.yevini.myvelog.request;
 
-import com.yevini.myvelog.web.dto.response.Posts;
-import com.yevini.myvelog.web.dto.response.UserTags;
+import com.yevini.myvelog.model.response.Posts;
+import com.yevini.myvelog.model.response.UserTags;
 import com.yevini.myvelog.web.service.WebClientService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

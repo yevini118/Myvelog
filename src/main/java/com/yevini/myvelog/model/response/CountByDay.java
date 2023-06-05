@@ -1,4 +1,4 @@
-package com.yevini.myvelog.web.dto.response;
+package com.yevini.myvelog.model.response;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

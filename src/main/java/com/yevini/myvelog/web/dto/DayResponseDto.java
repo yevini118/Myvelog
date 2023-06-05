@@ -1,6 +1,6 @@
 package com.yevini.myvelog.web.dto;
 
-import com.yevini.myvelog.velog.PostStat;
+import com.yevini.myvelog.model.velog.PostStat;
 import lombok.Getter;
 
 import java.time.LocalDate;

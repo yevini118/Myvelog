@@ -2,15 +2,15 @@ package com.yevini.myvelog.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yevini.myvelog.util.redis.StatsRedisUtil;
-import com.yevini.myvelog.velog.MyvelogStats;
-import com.yevini.myvelog.velog.News;
-import com.yevini.myvelog.velog.PostStat;
+import com.yevini.myvelog.model.velog.MyvelogStats;
+import com.yevini.myvelog.model.velog.News;
+import com.yevini.myvelog.model.velog.PostStat;
 import com.yevini.myvelog.web.dto.DayResponseDto;
 import com.yevini.myvelog.web.dto.MainResponseDto;
 import com.yevini.myvelog.web.dto.PostResponseDto;
-import com.yevini.myvelog.web.dto.response.Posts;
-import com.yevini.myvelog.web.dto.response.Stat;
-import com.yevini.myvelog.web.dto.response.UserTags;
+import com.yevini.myvelog.model.response.Posts;
+import com.yevini.myvelog.model.response.Stat;
+import com.yevini.myvelog.model.response.UserTags;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
