@@ -1,4 +1,4 @@
-package com.yevini.myvelog.util;
+package com.yevini.myvelog.global.util;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.interfaces.DecodedJWT;

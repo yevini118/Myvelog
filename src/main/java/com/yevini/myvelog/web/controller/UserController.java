@@ -3,10 +3,12 @@ package com.yevini.myvelog.web.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yevini.myvelog.web.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class UserController {
@@ -17,6 +19,8 @@ public class UserController {
     public String login() throws JsonProcessingException {
 
         String username = userService.login();
+        log.info("[Login] {}", username);
+
         return "redirect:/main/" + username;
     }
 
@@ -24,6 +28,8 @@ public class UserController {
     public String logout(@PathVariable String username) {
 
         userService.logout(username);
+        log.info("[Logout] {}", username);
+
         return "redirect:/";
     }
 }

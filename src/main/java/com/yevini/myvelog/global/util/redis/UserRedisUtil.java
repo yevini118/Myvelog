@@ -1,4 +1,4 @@
-package com.yevini.myvelog.util.redis;
+package com.yevini.myvelog.global.util.redis;
 
 import com.yevini.myvelog.model.velog.User;
 import lombok.RequiredArgsConstructor;

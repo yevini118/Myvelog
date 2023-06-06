@@ -5,6 +5,7 @@ import com.yevini.myvelog.web.dto.MainResponseDto;
 import com.yevini.myvelog.model.velog.User;
 import com.yevini.myvelog.web.service.MyvelogService;
 import com.yevini.myvelog.web.service.UserService;
+import groovy.util.logging.Slf4j;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

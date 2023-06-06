@@ -1,4 +1,4 @@
-package com.yevini.myvelog.util.redis;
+package com.yevini.myvelog.global.util.redis;
 
 import com.yevini.myvelog.model.velog.MyvelogStats;
 import lombok.RequiredArgsConstructor;
@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class StatsRedisUtil {
+public class MyVelogStatsRedisUtil {
 
     private final RedisTemplate<String, MyvelogStats> redisTemplate;
-    private static final String PREFIX = "STAT_";
+    private static final String PREFIX = "myVelogStats:";
 
     public void set(String username, MyvelogStats stats) {
 
