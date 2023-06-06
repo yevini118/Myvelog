@@ -21,7 +21,7 @@ public class RequestSpeedTest {
     WebClientService webClientService;
 
     private static List<Post> posts;
-    private final String accessToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZGMyNjhlYzMtMDc0Yy00NDI5LTgyY2EtNjY4M2JlODFlOWQzIiwiaWF0IjoxNjgzNjk3MzM2LCJleHAiOjE2ODM3MDA5MzYsImlzcyI6InZlbG9nLmlvIiwic3ViIjoiYWNjZXNzX3Rva2VuIn0.zLRTNZHOgsxOsRjN2vclQBazeKhLmsGBTfIhuJCm8rY";
+    private final String accessToken = "";
 
     @BeforeAll
     public static void setUp(@Autowired WebClientService webClientService) {

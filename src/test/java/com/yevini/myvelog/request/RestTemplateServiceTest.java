@@ -8,18 +8,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class RestTemplateServiceTest {
 
-    @InjectMocks
+    @Autowired
     private RestTemplateService restTemplateService;
-
-    @Mock
-    private RestTemplate restTemplate;
 
     @Test
     void userTags_가져오기() {
@@ -48,6 +47,4 @@ class RestTemplateServiceTest {
         //then
         assertEquals(posts.getPosts().size(), totalPostsCount);
     }
-
-
 }

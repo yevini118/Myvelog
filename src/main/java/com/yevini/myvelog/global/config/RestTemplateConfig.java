@@ -1,4 +1,4 @@
-package com.yevini.myvelog.config;
+package com.yevini.myvelog.global.config;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

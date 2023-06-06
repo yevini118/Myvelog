@@ -14,7 +14,7 @@ import java.util.List;
 import static java.util.Comparator.comparing;
 
 @Service
-public class StatService {
+public class MyVelogStatsService {
 
     public MyvelogStats getMyVelogStats(UserTags userTags, Posts posts, List<Stat> stats) {
 
@@ -42,11 +42,11 @@ public class StatService {
                 .visitsUp(myvelogStats.getTotalVisits() - statsHistory.getTotalVisits())
                 .likesUp(myvelogStats.getTotalLikes() - statsHistory.getTotalLikes())
                 .postsUp(myvelogStats.getTotalPosts() - statsHistory.getTotalPosts())
-                .postStats(getNewVisits(statsHistory.getPostStats(), myvelogStats.getPostStats()))
+                .postStats(getNewPostStats(statsHistory.getPostStats(), myvelogStats.getPostStats()))
                 .build();
     }
 
-    public List<PostStat> getPostStatByDate(LocalDate date, List<PostStat> postStats) {
+    public List<PostStat> getPostStatsByDate(LocalDate date, List<PostStat> postStats) {
 
         List<PostStat> newPostStats = new ArrayList<>();
 
@@ -96,7 +96,7 @@ public class StatService {
         return postStats;
     }
 
-    private List<PostStat> getNewVisits(List<PostStat> postStatsHistory, List<PostStat> postStats) {
+    private List<PostStat> getNewPostStats(List<PostStat> postStatsHistory, List<PostStat> postStats) {
 
         List<PostStat> newList = new ArrayList<>();
 

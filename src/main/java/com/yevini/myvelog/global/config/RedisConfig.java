@@ -1,4 +1,4 @@
-package com.yevini.myvelog.config;
+package com.yevini.myvelog.global.config;
 
 import com.yevini.myvelog.model.velog.User;
 import com.yevini.myvelog.model.velog.MyvelogStats;
@@ -37,7 +37,7 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisTemplate<String, MyvelogStats> statsRedisTemplate() {
+    public RedisTemplate<String, MyvelogStats> myVelogStatsRedisTemplate() {
 
         RedisTemplate<String, MyvelogStats> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory());
