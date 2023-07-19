@@ -32,10 +32,4 @@ public class PostStat {
         this.visits = visits;
     }
 
-    public PostStat(PostStat postStat, int visitsUp, int likesUp) {
-        this.id = postStat.getId();
-        this.title = postStat.getTitle();
-        this.visits = visitsUp;
-        this.likes = likesUp;
-    }
 }

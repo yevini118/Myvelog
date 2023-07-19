@@ -4,59 +4,94 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yevini.myvelog.model.response.CurrentUser;
 import com.yevini.myvelog.model.velog.User;
-import org.openqa.selenium.By;
-import org.openqa.selenium.PageLoadStrategy;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 
 @Service
 public class SeleniumService{
 
     private WebDriver driver;
-
+    private final ChromeOptions chromeOptions;
     private static final String URL = "https://velog.io/";
-    private static final String LOGIN_BUTTON_CLASS_NAME = "sc-bqiRlB";
-    private static final String USER_PROFILE_CLASS_NAME = "sc-fotOHu";
+    private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
+    private static final String USER_PROFILE_CLASS_NAME = "sc-hBUSln";
 
+    private static final int LOGIN_MAX_MINUTE = 3;
 
-    public User process() throws JsonProcessingException {
+    public SeleniumService() {
 
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\yevin\\Downloads\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\USER\\Downloads\\chromedriver.exe");
 
-        ChromeOptions chromeOptions = new ChromeOptions();
+        this.chromeOptions = new ChromeOptions();
+        chromeOptions.setExperimentalOption("debuggerAddress", "127.0.0.1:9222");
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
+    }
 
-        driver = new ChromeDriver(chromeOptions);
-        driver.get(URL);
-        driver.findElement(By.className(LOGIN_BUTTON_CLASS_NAME)).click();
+    public User login() throws JsonProcessingException , IOException{
 
+        openLoginPage();
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofMinutes(3));
-        try
-        {
-            webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.className(USER_PROFILE_CLASS_NAME)));
-        } catch (TimeoutException e) {
-            driver.quit();
-            throw new TimeoutException();
-        }
+        waitUntilLogin();
 
         CurrentUser currentUser = getCurrentUser();
         String accessToken = getAccessToken();
 
-        driver.quit();
-        return new User(currentUser, accessToken);
+        driver.close();
+
+        return User.builder()
+                .username(currentUser.getUsername())
+                .displayName(currentUser.getDisplayName())
+                .thumbnail(currentUser.getThumbnail())
+                .accessToken(accessToken)
+                .build();
     }
 
+    public void logout() {
+
+        FileSystemUtils.deleteRecursively(new File("C:/Selenium/ChromeData"));
+    }
+
+    private void openLoginPage() throws IOException {
+
+        Runtime.getRuntime().exec("C:/Program Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222 --user-data-dir=\"C:/Selenium/ChromeData\"");
+
+        driver = new ChromeDriver(chromeOptions);
+        driver.get(URL);
+
+        if (!isLoggedIn()) {
+            driver.findElement(By.className(LOGIN_BUTTON_CLASS_NAME)).click();
+        }
+    }
+
+    private void waitUntilLogin() {
+
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofMinutes(LOGIN_MAX_MINUTE));
+
+        try {
+            webDriverWait.until(loginCondition());
+        } catch (TimeoutException e) {
+            driver.close();
+            throw new TimeoutException();
+        }
+    }
+
+    private boolean isLoggedIn() {
+
+        return driver.manage().getCookieNamed("access_token") != null;
+    }
 
     private String getAccessToken(){
 
@@ -67,11 +102,21 @@ public class SeleniumService{
     private CurrentUser getCurrentUser() throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        WebStorage storage = (WebStorage)driver;
 
-        LocalStorage localStorage = storage.getLocalStorage();
+        LocalStorage localStorage = getLocalStorage();
+
         String currentUser = localStorage.getItem("CURRENT_USER");
 
         return objectMapper.readValue(currentUser, CurrentUser.class);
+    }
+
+    private static ExpectedCondition<WebElement> loginCondition() {
+        return ExpectedConditions.visibilityOfElementLocated(By.className(USER_PROFILE_CLASS_NAME));
+    }
+
+    private LocalStorage getLocalStorage() {
+
+        WebStorage storage = (WebStorage)driver;
+        return storage.getLocalStorage();
     }
 }
