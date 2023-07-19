@@ -89,10 +89,6 @@ public class WebClientService {
 
         CountDownLatch countDownLatch = new CountDownLatch(posts.size());
 
-        WebClient webClientMutated = webClient.mutate()
-                .defaultCookie("access_token", accessToken)
-                .build();
-
         List<Stat> stats = Collections.synchronizedList(new ArrayList<>());
         for (Post post : posts) {
 
@@ -114,7 +110,7 @@ public class WebClientService {
                             """)
                     .build();
 
-            webClientMutated
+            getWebClientAdded(accessToken)
                 .post()
                 .bodyValue(body)
                 .retrieve()
@@ -137,10 +133,6 @@ public class WebClientService {
 
     public List<Stat> getStatsByBlock(List<Post> posts, String accessToken) {
 
-        WebClient webClientMutated = webClient.mutate()
-                .defaultCookie("access_token", accessToken)
-                .build();
-
         List<Stat> stats = new ArrayList<>();
         for (Post post : posts) {
 
@@ -162,7 +154,8 @@ public class WebClientService {
                             """)
                     .build();
 
-            stats.add(webClientMutated.post()
+            stats.add(getWebClientAdded(accessToken)
+                    .post()
                     .bodyValue(body)
                     .retrieve()
                     .bodyToMono(Stat.class)
@@ -170,5 +163,11 @@ public class WebClientService {
         }
 
         return stats;
+    }
+
+    private WebClient getWebClientAdded(String accessToken) {
+        return webClient.mutate()
+                .defaultCookie("access_token", accessToken)
+                .build();
     }
 }

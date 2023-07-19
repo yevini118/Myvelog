@@ -5,9 +5,9 @@ import com.yevini.myvelog.global.util.JwtUtil;
 import com.yevini.myvelog.global.util.redis.UserRedisUtil;
 import com.yevini.myvelog.model.velog.User;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.Duration;
 
 @RequiredArgsConstructor
@@ -18,9 +18,9 @@ public class UserService {
     private final SeleniumService seleniumService;
     private final UserRedisUtil userRedisUtil;
 
-    public String login() throws JsonProcessingException {
+    public String login() throws JsonProcessingException, IOException {
 
-        User user = seleniumService.process();
+        User user = seleniumService.login();
 
         Duration duration = jwtUtil.getDurationLeft(user.getAccessToken());
         userRedisUtil.set(user, duration);
@@ -30,6 +30,7 @@ public class UserService {
 
     public void logout(String username) {
 
+        seleniumService.logout();
         userRedisUtil.delete(username);
     }
 
@@ -37,9 +38,15 @@ public class UserService {
 
         User user = userRedisUtil.get(username);
 
+        checkUserNull(user);
+
+        return user;
+    }
+
+    private static void checkUserNull(User user) {
+        
         if (user == null) {
             throw new IllegalArgumentException();
         }
-        return user;
     }
 }

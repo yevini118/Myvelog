@@ -2,6 +2,7 @@ package com.yevini.myvelog.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yevini.myvelog.global.util.redis.MyVelogStatsRedisUtil;
+import com.yevini.myvelog.model.response.CountByDay;
 import com.yevini.myvelog.model.velog.MyvelogStats;
 import com.yevini.myvelog.model.velog.News;
 import com.yevini.myvelog.model.velog.PostStat;
@@ -16,14 +17,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.Comparator.comparing;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class MyvelogService {
 
-    private final MyVelogStatsService myVelogStatsService;
     private final WebClientService webClientService;
     private final MyVelogStatsRedisUtil myVelogStatsRedisUtil;
 
@@ -35,10 +38,16 @@ public class MyvelogService {
 
         MyvelogStats statsHistory = myVelogStatsRedisUtil.get(username);
 
-        MyvelogStats myvelogStats = myVelogStatsService.getMyVelogStats(userTags, posts, stats);
+        MyvelogStats myvelogStats = new MyvelogStats(userTags, posts, stats);
         myVelogStatsRedisUtil.set(username, myvelogStats);
 
-        News news = myVelogStatsService.getNews(statsHistory, myvelogStats);
+        News news;
+        if(statsHistory == null) {
+            news = new News();
+        }
+        else {
+            news = new News(statsHistory, myvelogStats);
+        }
 
         return new MainResponseDto(myvelogStats, news);
     }
@@ -55,8 +64,10 @@ public class MyvelogService {
         }
 
         MyvelogStats myvelogStats = myVelogStatsRedisUtil.get(username);
-        List<PostStat> postStatByDate = myVelogStatsService.getPostStatsByDate(date, myvelogStats.getPostStats());
+        List<PostStat> postStatByDate = myvelogStats.getPostStatsByDate(date, myvelogStats.getPostStats());
 
         return new DayResponseDto(date, postStatByDate);
     }
+
+
 }

@@ -138,11 +138,11 @@
                         <td class="border border-l-0 px-4 py-2" th:text="${postStat.title}"></td>
                         <td class="border border-l-0 px-4 py-2">
                             <i th:class="${news.likesUp >= 0} ? 'fa fa-caret-up' : 'fa fa-caret-down'" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
-                            [[${postStat.likes}]]
+                            [[${postStat.likesUp}]]
                         </td>
                         <td class="border border-l-0 border-r-0 px-4 py-2">
                             <i class="fa fa-caret-up" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
-                            [[${postStat.visits}]]
+                            [[${postStat.visitsUp}]]
                         </td>
                     </tr>
 
