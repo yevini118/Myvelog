@@ -66,7 +66,7 @@ public class SeleniumService{
 
     private void openLoginPage() throws IOException {
 
-        Runtime.getRuntime().exec("C:/Program Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222 --user-data-dir=\"C:/Selenium/ChromeData\"");
+        Runtime.getRuntime().exec("C:/Program Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222 --user-data-dir=\");
 
         driver = new ChromeDriver(chromeOptions);
         driver.get(URL);
