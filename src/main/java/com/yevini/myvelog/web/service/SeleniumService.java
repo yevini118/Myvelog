@@ -25,6 +25,7 @@ public class SeleniumService{
     private WebDriver driver;
     private final ChromeOptions chromeOptions;
     private static final String URL = "https://velog.io/";
+    private static final String CHROME_DATA_PATH = "C:/Selenium/ChromeData";
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
     private static final String USER_PROFILE_CLASS_NAME = "sc-hBUSln";
 
@@ -61,12 +62,12 @@ public class SeleniumService{
 
     public void logout() {
 
-        FileSystemUtils.deleteRecursively(new File("C:/Selenium/ChromeData"));
+        FileSystemUtils.deleteRecursively(new File(CHROME_DATA_PATH));
     }
 
     private void openLoginPage() throws IOException {
 
-        Runtime.getRuntime().exec("C:/Program Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222 --user-data-dir=\");
+        Runtime.getRuntime().exec("C:/Program Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222 --user-data-dir=" + CHROME_DATA_PATH);
 
         driver = new ChromeDriver(chromeOptions);
         driver.get(URL);
