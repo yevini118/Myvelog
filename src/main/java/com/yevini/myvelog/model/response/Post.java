@@ -18,6 +18,7 @@ public class Post {
     @JsonProperty("comments_count")
     private int commentsCount;
     private List<String> tags;
+    @JsonProperty("url_slug")
+    private String urlSlug;
     private int likes;
-
 }

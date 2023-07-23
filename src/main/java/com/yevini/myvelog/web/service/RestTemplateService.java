@@ -71,6 +71,7 @@ public class RestTemplateService {
                                 comments_count
                                 tags
                                 likes
+                                url_slug
                            }
                         }
                         """)

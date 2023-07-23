@@ -74,6 +74,7 @@ public class MyvelogStats {
             postStats.add(PostStat.builder()
                     .id(posts.get(i).getId())
                     .title(posts.get(i).getTitle())
+                    .urlSlug(posts.get(i).getUrlSlug())
                     .likes(posts.get(i).getLikes())
                     .visits(stats.get(i).getTotal())
                     .countByDays(stats.get(i).getCountByDays())
