@@ -30,6 +30,7 @@ public class PostStat {
 
     public PostStat(PostStat postStat, int visits) {
         this.id = postStat.getId();
+        this.urlSlug = postStat.getUrlSlug();
         this.title = postStat.getTitle();
         this.visits = visits;
     }
