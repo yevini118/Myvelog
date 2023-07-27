@@ -25,7 +25,10 @@ public class SeleniumService{
     private WebDriver driver;
     private final ChromeOptions chromeOptions;
     private static final String URL = "https://velog.io/";
+
+    private static final String CHROME_PATH = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe";
     private static final String CHROME_DATA_PATH = "C:/Selenium/ChromeData";
+
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
     private static final String USER_PROFILE_CLASS_NAME = "sc-hBUSln";
 
@@ -34,7 +37,7 @@ public class SeleniumService{
     public SeleniumService() {
 
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\USER\\Downloads\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\yevin\\Downloads\\chromedriver.exe");
 
         this.chromeOptions = new ChromeOptions();
         chromeOptions.setExperimentalOption("debuggerAddress", "127.0.0.1:9222");
@@ -67,7 +70,7 @@ public class SeleniumService{
 
     private void openLoginPage() throws IOException {
 
-        Runtime.getRuntime().exec("C:/Program Files/Google/Chrome/Application/chrome.exe --remote-debugging-port=9222 --user-data-dir=" + CHROME_DATA_PATH);
+        Runtime.getRuntime().exec( CHROME_PATH + " --remote-debugging-port=9222 --user-data-dir=" + CHROME_DATA_PATH);
 
         driver = new ChromeDriver(chromeOptions);
         driver.get(URL);
