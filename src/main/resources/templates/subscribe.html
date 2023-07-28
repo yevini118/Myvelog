@@ -6,7 +6,233 @@
 
 <body class="bg-gray-100">
 
+    <!--Navbar fragment-->
+    <th:block th:replace="~{layout/navbar :: navbar}"></th:block>
 
+    <!-- Start wrapper -->
+    <div class="h-screen flex flex-row flex-wrap">
+
+        <!--Sidebar fragment-->
+        <th:block th:replace="~{layout/sidebar :: sidebar}"></th:block>
+
+        <!-- Start content -->
+        <div class="bg-gray-100 flex-1 p-6 md:mt-16">
+
+            <!-- card -->
+            <div class="report-card">
+                <div class="card">
+                    <div class="card-body flex flex-col">
+
+                        <!-- top -->
+                        <div class="flex flex-row justify-between items-center">
+                            <div class="h6 text-yellow-600 fad fa-sitemap"></div>
+                            <span class="rounded-full text-white badge bg-teal-400 text-xs">
+                        72%
+                        <i class="fal fa-chevron-up ml-1"></i>
+                    </span>
+                        </div>
+                        <!-- end top -->
+
+                        <!-- bottom -->
+                        <div class="mt-8">
+                            <h1 class="h5 num-4"></h1>
+                            <p>total Products</p>
+                        </div>
+                        <!-- end bottom -->
+
+                    </div>
+                </div>
+                <div class="footer bg-white p-1 mx-4 border border-t-0 rounded rounded-t-none"></div>
+            </div>
+            <!-- end card -->
+
+            <div class="card">
+
+                <div class="card-body">
+                    <h2 class="font-bold text-lg mb-10">구독</h2>
+
+                    <!-- start a table -->
+                    <table class="table-fixed w-full">
+
+                        <!-- table head -->
+                        <thead class="text-left">
+                        <tr>
+                            <th class="w-1/2 pb-10 text-sm font-extrabold tracking-wide">이름</th>
+                            <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">제목</th>
+                            <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right">벨로그</th>
+                            <th class="w-1/4 pb-10 text-sm font-extrabold tracking-wide text-right"></th>
+                        </tr>
+                        </thead>
+                        <!-- end table head -->
+
+                        <!-- table body -->
+                        <tbody class="text-left text-gray-600">
+
+                        <!-- item -->
+                        <tr>
+                            <!-- name -->
+                            <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
+                                <div class="w-8 h-8 overflow-hidden rounded-full">
+                                    <img src="img/user2.jpg" class="object-cover">
+                                </div>
+                                <p class="ml-3 name-1">user name</p>
+                            </th>
+                            <!-- name -->
+
+                            <!-- product -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
+                            <!-- product -->
+
+                            <!-- invoice -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
+                            <!-- invoice -->
+
+                            <!-- status -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right"><a href="#" class="btn mr-4 text-sm py-2 block">구독취소</a></th>
+                            <!-- status -->
+
+                        </tr>
+                        <!-- item -->
+
+
+                        <!-- item -->
+                        <tr>
+                            <!-- name -->
+                            <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
+                                <div class="w-8 h-8 overflow-hidden rounded-full">
+                                    <img src="img/user3.jpg" class="object-cover">
+                                </div>
+                                <p class="ml-3 name-1">user name</p>
+                            </th>
+                            <!-- name -->
+
+                            <!-- product -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
+                            <!-- product -->
+
+                            <!-- invoice -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
+                            <!-- invoice -->
+
+                            <!-- price -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">$<span class="num-2"></span></th>
+                            <!-- price -->
+
+                            <!-- status -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">shipped</th>
+                            <!-- status -->
+
+                        </tr>
+                        <!-- item -->
+
+
+                        <!-- item -->
+                        <tr>
+                            <!-- name -->
+                            <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
+                                <div class="w-8 h-8 overflow-hidden rounded-full">
+                                    <img src="img/user2.jpg" class="object-cover">
+                                </div>
+                                <p class="ml-3 name-1">user name</p>
+                            </th>
+                            <!-- name -->
+
+                            <!-- product -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
+                            <!-- product -->
+
+                            <!-- invoice -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
+                            <!-- invoice -->
+
+                            <!-- price -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">$<span class="num-2"></span></th>
+                            <!-- price -->
+
+                            <!-- status -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">shipped</th>
+                            <!-- status -->
+
+                        </tr>
+                        <!-- item -->
+
+                        <!-- item -->
+                        <tr>
+                            <!-- name -->
+                            <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
+                                <div class="w-8 h-8 overflow-hidden rounded-full">
+                                    <img src="img/user1.jpg" class="object-cover">
+                                </div>
+                                <p class="ml-3 name-1">user name</p>
+                            </th>
+                            <!-- name -->
+
+                            <!-- product -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
+                            <!-- product -->
+
+                            <!-- invoice -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
+                            <!-- invoice -->
+
+                            <!-- price -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">$<span class="num-2"></span></th>
+                            <!-- price -->
+
+                            <!-- status -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">shipped</th>
+                            <!-- status -->
+
+                        </tr>
+                        <!-- item -->
+
+                        <!-- item -->
+                        <tr>
+                            <!-- name -->
+                            <th class="w-1/2 mb-4 text-xs font-extrabold tracking-wider flex flex-row items-center w-full">
+                                <div class="w-8 h-8 overflow-hidden rounded-full">
+                                    <img src="img/user3.jpg" class="object-cover">
+                                </div>
+                                <p class="ml-3 name-1">user name</p>
+                            </th>
+                            <!-- name -->
+
+                            <!-- product -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">Nike Sport</th>
+                            <!-- product -->
+
+                            <!-- invoice -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">#<span class="num-4"></span></th>
+                            <!-- invoice -->
+
+                            <!-- price -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">$<span class="num-2"></span></th>
+                            <!-- price -->
+
+                            <!-- status -->
+                            <th class="w-1/4 mb-4 text-xs font-extrabold tracking-wider text-right">shipped</th>
+                            <!-- status -->
+
+                        </tr>
+                        <!-- item -->
+
+
+
+
+                        </tbody>
+                        <!-- end table body -->
+
+                    </table>
+                    <!-- end a table -->
+                </div>
+
+            </div>
+
+        </div>
+        <!-- end content -->
+
+    </div>
+    <!-- end wrapper -->
 
     <!--Footer fragment-->
     <th:block th:replace="~{layout/footer :: footer}"></th:block>

@@ -26,8 +26,10 @@ public class SeleniumService{
     private final ChromeOptions chromeOptions;
     private static final String URL = "https://velog.io/";
 
-    private static final String CHROME_PATH = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe";
+    private static final String CHROME_PATH = "C:/Program Files/Google/Chrome/Application/chrome.exe";
     private static final String CHROME_DATA_PATH = "C:/Selenium/ChromeData";
+
+    private static final String CHROMEDRIVER_PATH = "C:\\Users\\yevin\\Downloads\\chromedriver.exe";
 
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
     private static final String USER_PROFILE_CLASS_NAME = "sc-hBUSln";
@@ -37,7 +39,7 @@ public class SeleniumService{
     public SeleniumService() {
 
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\yevin\\Downloads\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_PATH);
 
         this.chromeOptions = new ChromeOptions();
         chromeOptions.setExperimentalOption("debuggerAddress", "127.0.0.1:9222");
