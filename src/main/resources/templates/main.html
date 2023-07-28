@@ -109,47 +109,86 @@
             </div>
             <!-- end Analytics -->
 
-            <!-- Start news -->
-            <div class="card col-span-3 xl:col-span-1" style="margin-top: 20px;">
-                <div class="card-header">
-                    <h1 class="h6">새로운 조회수</h1>
+            <div class="grid grid-cols-2 gap-6">
+                <!-- Start news -->
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header">
+                        <h1 class="h6">새로운 댓글</h1>
+                    </div>
+
+                    <table class="table-auto w-full text-left">
+                        <thead>
+                        <tr>
+                            <th class="px-4 py-2 border-r"></th>
+                            <th class="px-4 py-2 border-r">게시글</th>
+                            <th class="px-4 py-2">댓글</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-gray-600">
+
+                        <tr th:if="${#lists.isEmpty(news.postStats)}">
+                            <td class="border border-l-0 px-4 py-2 text-center"></td>
+                            <td class="border border-l-0 px-4 py-2">새로운 댓글이 없어요!</td>
+                            <td class="border border-l-0 border-r-0 px-4 py-2"></td>
+                        </tr>
+
+                        <tr th:each="postStat : ${news.postStats}">
+                            <td class="border border-l-0 px-4 py-2 text-center" th:text="${postStatStat.count}"></td>
+                            <td class="border border-l-0 px-4 py-2" th:text="${postStat.title}"></td>
+                            <td class="border border-l-0 border-r-0 px-4 py-2">
+                                <i class="fa fa-caret-up" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
+                                [[${postStat.visitsUp}]]
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
                 </div>
+                <!-- End news -->
 
-                <table class="table-auto w-full text-left">
-                    <thead>
-                    <tr>
-                        <th class="px-4 py-2 border-r"></th>
-                        <th class="px-4 py-2 border-r">게시글</th>
-                        <th class="px-4 py-2 border-r">좋아요</th>
-                        <th class="px-4 py-2">조회수</th>
-                    </tr>
-                    </thead>
-                    <tbody class="text-gray-600">
+                <!-- Start news -->
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header">
+                        <h1 class="h6">새로운 조회수</h1>
+                    </div>
 
-                    <tr th:if="${#lists.isEmpty(news.postStats)}">
-                        <td class="border border-l-0 px-4 py-2 text-center"></td>
-                        <td class="border border-l-0 px-4 py-2">새로운 조회수가 없어요!</td>
-                        <td class="border border-l-0 px-4 py-2"></td>
-                        <td class="border border-l-0 border-r-0 px-4 py-2"></td>
-                    </tr>
+                    <table class="table-auto w-full text-left">
+                        <thead>
+                        <tr>
+                            <th class="px-4 py-2 border-r"></th>
+                            <th class="px-4 py-2 border-r">게시글</th>
+                            <th class="px-4 py-2 border-r">좋아요</th>
+                            <th class="px-4 py-2">조회수</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-gray-600">
 
-                    <tr th:each="postStat : ${news.postStats}">
-                        <td class="border border-l-0 px-4 py-2 text-center" th:text="${postStatStat.count}"></td>
-                        <td class="border border-l-0 px-4 py-2" th:text="${postStat.title}"></td>
-                        <td class="border border-l-0 px-4 py-2">
-                            <i th:class="${news.likesUp >= 0} ? 'fa fa-caret-up' : 'fa fa-caret-down'" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
-                            [[${postStat.likesUp}]]
-                        </td>
-                        <td class="border border-l-0 border-r-0 px-4 py-2">
-                            <i class="fa fa-caret-up" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
-                            [[${postStat.visitsUp}]]
-                        </td>
-                    </tr>
+                        <tr th:if="${#lists.isEmpty(news.postStats)}">
+                            <td class="border border-l-0 px-4 py-2 text-center"></td>
+                            <td class="border border-l-0 px-4 py-2">새로운 조회수가 없어요!</td>
+                            <td class="border border-l-0 px-4 py-2"></td>
+                            <td class="border border-l-0 border-r-0 px-4 py-2"></td>
+                        </tr>
 
-                    </tbody>
-                </table>
+                        <tr th:each="postStat : ${news.postStats}">
+                            <td class="border border-l-0 px-4 py-2 text-center" th:text="${postStatStat.count}"></td>
+                            <td class="border border-l-0 px-4 py-2" th:text="${postStat.title}"></td>
+                            <td class="border border-l-0 px-4 py-2">
+                                <i th:class="${news.likesUp >= 0} ? 'fa fa-caret-up' : 'fa fa-caret-down'" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
+                                [[${postStat.likesUp}]]
+                            </td>
+                            <td class="border border-l-0 border-r-0 px-4 py-2">
+                                <i class="fa fa-caret-up" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
+                                [[${postStat.visitsUp}]]
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- End news -->
             </div>
-            <!-- End news -->
+
 
         </div>
         <!-- end content -->

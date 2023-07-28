@@ -140,3 +140,20 @@ sideBarHideBtn.addEventListener('click', function() {
     ;
 });
 // end with sidebar
+
+const openBtn = document.getElementById('popupBtn');
+const modal = document.getElementById('modal-wrap');
+const bg = document.getElementById('modal-bg');
+const closeBtn = document.getElementById('closeBtn');
+
+openBtn.onclick = function() {
+    modal.style.display = 'block';
+    bg.style.display = 'block';
+}
+
+closeBtn.onclick = function() {
+    modal.style.display = 'none';
+    bg.style.display = 'none';
+}
+
+

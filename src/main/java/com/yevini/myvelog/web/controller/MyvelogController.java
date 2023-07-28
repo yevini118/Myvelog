@@ -59,6 +59,11 @@ public class MyvelogController {
         return "day";
     }
 
+    @GetMapping("/feed/{username}")
+    public String feed(@PathVariable String username) {
+        return "feed";
+    }
+
     @GetMapping("/subscribe/{username}")
     public String subscribe(@PathVariable String username) {
         return "subscribe";
