@@ -23,6 +23,7 @@ public class SubscribeController {
     @PostMapping("/subscribe/{username}")
     public String add(@PathVariable String username, @RequestParam String subscribe){
         subscribeService.save(username, subscribe);
+        System.out.println(subscribe);
         return "subscribe";
     }
 
