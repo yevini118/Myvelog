@@ -1,6 +1,5 @@
 package com.yevini.myvelog.model.monbodb;
 
-import lombok.Data;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,8 +10,11 @@ public class Subscribe {
 
     @Id
     private String id;
-
     private String subscriber;
-
     private String username;
+
+    public Subscribe(String subscriber, String username) {
+        this.subscriber = subscriber;
+        this.username = username;
+    }
 }

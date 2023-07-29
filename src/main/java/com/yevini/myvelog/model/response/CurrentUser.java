@@ -10,13 +10,12 @@ import lombok.Getter;
 @Getter
 public class CurrentUser {
 
-    private final String id;
     private final String username;
     private final String thumbnail;
     private final String displayName;
 
     @JsonCreator
-    public CurrentUser(@JsonProperty("id") String id, @JsonProperty("username") String username, @JsonProperty("profile") JsonNode profileNode) {
+    public CurrentUser(@JsonProperty("username") String username, @JsonProperty("profile") JsonNode profileNode) {
 
         this.username = username;
         this.thumbnail = profileNode.get("thumbnail").asText();
