@@ -1,23 +1,26 @@
 package com.yevini.myvelog.web.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yevini.myvelog.model.monbodb.Subscribe;
+import com.yevini.myvelog.model.response.*;
+import com.yevini.myvelog.model.velog.User;
 import com.yevini.myvelog.web.dto.request.RequestBody;
-import com.yevini.myvelog.web.dto.request.variables.PostsVariables;
-import com.yevini.myvelog.web.dto.request.variables.StatsVariables;
-import com.yevini.myvelog.web.dto.request.variables.UserTagsVariables;
-import com.yevini.myvelog.web.dto.request.variables.Variables;
-import com.yevini.myvelog.model.response.Post;
-import com.yevini.myvelog.model.response.Posts;
-import com.yevini.myvelog.model.response.Stat;
-import com.yevini.myvelog.model.response.UserTags;
+import com.yevini.myvelog.web.dto.request.variables.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,6 +28,62 @@ import java.util.concurrent.CountDownLatch;
 public class WebClientService {
 
     private final WebClient webClient;
+
+    public boolean isUserProfileExists(String username) {
+
+        Void response = webClient.mutate().baseUrl("https://velog.io/@" + username).build()
+                .get()
+                .retrieve()
+                .bodyToMono(Void.class)
+                .onErrorComplete()
+                .block();
+
+        return response != null;
+    }
+
+
+    public List<UserProfile> getUserProfile(List<Subscribe> subscribes) {
+
+        CountDownLatch countDownLatch = new CountDownLatch(subscribes.size());
+
+        List<UserProfile> userProfiles = Collections.synchronizedList(new ArrayList<>());
+        for (Subscribe subscribe : subscribes) {
+
+            Variables variables = new UserProfileVariables(subscribe.getUsername());
+
+            RequestBody body = RequestBody.builder()
+                    .operationName("UserProfile")
+                    .variables(variables)
+                    .query("""
+                        query UserProfile($username: String!) {
+                            user(username: $username) {
+                                username
+                                profile {
+                                    display_name
+                                    thumbnail
+                                }
+                            }
+                        }
+                        """)
+                    .build();
+
+            webClient
+                    .post()
+                    .bodyValue(body)
+                    .retrieve()
+                    .bodyToMono(UserProfile.class)
+                    .doOnTerminate(countDownLatch::countDown)
+                    .subscribe(userProfiles::add);
+        }
+
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return userProfiles;
+    }
 
     public UserTags getUserTags(String username){
 

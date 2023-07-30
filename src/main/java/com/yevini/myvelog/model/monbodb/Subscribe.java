@@ -17,4 +17,13 @@ public class Subscribe {
         this.subscriber = subscriber;
         this.username = username;
     }
+
+    @Override
+    public String toString() {
+        return "Subscribe{" +
+                "id='" + id + '\'' +
+                ", subscriber='" + subscriber + '\'' +
+                ", username='" + username + '\'' +
+                '}';
+    }
 }
