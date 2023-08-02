@@ -7,27 +7,30 @@ import java.util.Collection;
 
 public class VelogAuthenticationToken extends AbstractAuthenticationToken {
 
-    private final String velogAccessToken;
+    private Object principal;
+    private String velogAccessToken;
 
-    public VelogAuthenticationToken(String velogAccessToken) {
+    public VelogAuthenticationToken(Object principal, String velogAccessToken) {
         super(null);
+        this.principal = principal;
         this.velogAccessToken = velogAccessToken;
         setAuthenticated(false);
     }
 
-    public VelogAuthenticationToken(Collection<? extends GrantedAuthority> authorities, String velogAccessToken) {
+    public VelogAuthenticationToken(Collection<? extends GrantedAuthority> authorities, Object principal, String velogAccessToken) {
         super(authorities);
+        this.principal = principal;
         this.velogAccessToken = velogAccessToken;
         super.setAuthenticated(true);
     }
 
     @Override
     public Object getCredentials() {
-        return null;
+        return velogAccessToken;
     }
 
     @Override
     public Object getPrincipal() {
-        return velogAccessToken;
+        return principal;
     }
 }

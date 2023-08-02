@@ -1,11 +1,13 @@
 package com.yevini.myvelog.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.yevini.myvelog.global.security.CustomUserDetails;
 import com.yevini.myvelog.model.velog.User;
 import com.yevini.myvelog.web.dto.MainResponseDto;
 import com.yevini.myvelog.web.service.MyvelogService;
 import com.yevini.myvelog.web.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +30,11 @@ public class MyvelogController {
     }
 
     @GetMapping("/main/{username}")
-    public String main(@PathVariable String username, Model model) throws InterruptedException, JsonProcessingException {
+    public String main(@PathVariable String username, Model model, @AuthenticationPrincipal Object customUserDetails) throws InterruptedException, JsonProcessingException {
 
         User user = userService.getUser(username);
+
+        System.out.println(customUserDetails.getUser());
 
         MainResponseDto responseDto = myvelogService.main(username, user.getAccessToken());
 

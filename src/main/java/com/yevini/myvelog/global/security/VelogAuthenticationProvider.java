@@ -1,25 +1,32 @@
 package com.yevini.myvelog.global.security;
 
-import com.yevini.myvelog.global.util.redis.UserRedisUtil;
+import com.yevini.myvelog.model.velog.User;
+import com.yevini.myvelog.web.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
-
+@RequiredArgsConstructor
 @Component
 public class VelogAuthenticationProvider implements AuthenticationProvider {
+
+    private final UserService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-        Collection<? extends GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("user");
-        String accessToken = authentication.getPrincipal().toString();
+        UserDetails userDetails = userService.loadUserByUsername(authentication.getPrincipal().toString());
 
-        return new VelogAuthenticationToken(authorities, accessToken);
+//        if (authentication.getCredentials() != user.getPassword()) {
+//            throw new BadCredentialsException("Authentication failed: accessToken does not match");
+//        }
+
+        //예외처리
+        return new VelogAuthenticationToken(userDetails.getAuthorities(), userDetails, userDetails.getPassword());
     }
 
     @Override

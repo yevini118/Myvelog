@@ -1,12 +1,19 @@
 package com.yevini.myvelog.model.velog;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.yevini.myvelog.global.security.VelogAuthenticationFilter;
 import com.yevini.myvelog.global.security.VelogAuthenticationToken;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,6 +26,17 @@ public class User{
     private String accessToken;
 
     public VelogAuthenticationToken toAuthentication() {
-        return new VelogAuthenticationToken(accessToken);
+
+        return new VelogAuthenticationToken(username, accessToken);
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", thumbnail='" + thumbnail + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", accessToken='" + accessToken + '\'' +
+                '}';
     }
 }
