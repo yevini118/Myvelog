@@ -34,8 +34,6 @@ public class MyvelogController {
 
         User user = userService.getUser(username);
 
-        System.out.println(customUserDetails.getUser());
-
         MainResponseDto responseDto = myvelogService.main(username, user.getAccessToken());
 
         model.addAttribute("user", user);

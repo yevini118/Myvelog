@@ -36,6 +36,7 @@ public class WebSecurityConfig{
                 .formLogin().disable()
                 .httpBasic().disable()
                 .anonymous().disable()
+                .csrf().disable()
 
                 .authorizeHttpRequests()
                 .anyRequest().permitAll()

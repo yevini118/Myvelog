@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = IllegalArgumentException.class)
     public String handleIllegalArgumentException(Exception e, Model model) {
-        log.error("[IllegalArgumentException] no user");
+        log.error("[IllegalArgumentException] {}", e.getMessage());
 
         model.addAttribute("logout", true);
         return "index";
