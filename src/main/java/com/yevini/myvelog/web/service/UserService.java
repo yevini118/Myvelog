@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService {
     private static void checkUserNull(User user) {
         
         if (user == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("no user");
         }
     }
 

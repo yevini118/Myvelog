@@ -15,10 +15,14 @@ public class SubscribeService {
     private final SubscribeRepository subscribeRepository;
     private final WebClientService webClientService;
 
-    public void save(String username, String subscribe){
-        boolean user = webClientService.isUserProfileExists(subscribe);
-        System.out.println(user);
-        subscribeRepository.save(new Subscribe(username, subscribe));
+    public boolean save(String username, String subscribe){
+        boolean userProfileExists = webClientService.isUserProfileExists(subscribe);
+
+        if (userProfileExists) {
+            subscribeRepository.save(new Subscribe(username, subscribe));
+            return true;
+        }
+        return false;
     }
 
     public List<UserProfile> getSubscribes(String username) {

@@ -2,9 +2,11 @@ package com.yevini.myvelog.model.monbodb;
 
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
+@CompoundIndex(def = "{'subscribe' : 1, 'username' : 1}", unique = true)
 @Document(collection = "subscribe")
 public class Subscribe {
 

@@ -31,14 +31,14 @@ public class WebClientService {
 
     public boolean isUserProfileExists(String username) {
 
-        Void response = webClient.mutate().baseUrl("https://velog.io/@" + username).build()
+        ResponseEntity<Void> responseEntity = webClient.mutate().baseUrl("https://velog.io/@" + username).build()
                 .get()
                 .retrieve()
-                .bodyToMono(Void.class)
+                .toEntity(Void.class)
                 .onErrorComplete()
                 .block();
 
-        return response != null;
+        return responseEntity != null;
     }
 
 

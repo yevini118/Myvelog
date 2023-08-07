@@ -34,6 +34,7 @@ public class MyvelogController {
 
         MainResponseDto responseDto = myvelogService.main(customUserDetails.getUsername(), customUserDetails.getPassword());
 
+
         model.addAttribute("user", customUserDetails.getUser());
         model.addAttribute("stats", responseDto.getMyvelogStats());
         model.addAttribute("news", responseDto.getNews());
