@@ -17,21 +17,21 @@
         <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">톻계</p>
 
         <!-- link -->
-        <a th:href="@{ ${user == null} ? '' : |/main/${user.username}| }" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <a th:href="@{/main}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
             <i class="fa-solid fa-chart-pie"></i>
             MyVelog Dashboard
         </a>
         <!-- end link -->
 
         <!-- link -->
-        <a th:href="@{ ${user == null} ? '' : |/post/${user.username}| }" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <a th:href="@{/post}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
             <i class="fa-solid fa-ranking-star"></i>
             Post Rank
         </a>
         <!-- end link -->
 
         <!-- link -->
-        <a th:href="@{ ${user == null} ? '' : |/day/${user.username}| }" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <a th:href="@{/day}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
             <i class="fa-regular fa-calendar"></i>
             Visits By Day
         </a>
@@ -40,14 +40,14 @@
         <p class="uppercase text-xs text-gray-600 mb-4 tracking-wider">구독</p>
 
         <!-- link -->
-        <a th:href="@{ ${user == null} ? '' : |/feed/${user.username}| }" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <a th:href="@{/feed}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
             <i class="fa-regular fa-comment-dots"></i>
             Feed
         </a>
         <!-- end link -->
 
         <!-- link -->
-        <a th:href="@{ ${user == null} ? '' : |/subscribe/${user.username}| }" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+        <a th:href="@{/subscribe}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
             <i class="fa-solid fa-users"></i>
             Subscribe
         </a>

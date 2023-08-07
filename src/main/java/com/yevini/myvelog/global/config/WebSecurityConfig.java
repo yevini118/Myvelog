@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
 import java.util.Arrays;
 
@@ -41,9 +42,6 @@ public class WebSecurityConfig{
                 .anyRequest().permitAll()
                 .and()
                 .addFilterBefore(velogAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-//                .and()
-//                .securityContext()
-//                .securityContextRepository(new HttpSessionSecurityContextRepository());
 
         return http.build();
     }
@@ -51,7 +49,8 @@ public class WebSecurityConfig{
     @Bean VelogAuthenticationFilter velogAuthenticationFilter() {
         VelogAuthenticationFilter filter = new VelogAuthenticationFilter("/login", seleniumService, jwtUtil, userRedisUtil);
         filter.setAuthenticationManager(authenticationManager());
-        filter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler("/main/"));
+        filter.setAuthenticationSuccessHandler(new CustomAuthenticationSuccessHandler("/main", jwtUtil));
+        filter.setSecurityContextRepository(new HttpSessionSecurityContextRepository());
         return filter;
     }
 

@@ -29,6 +29,7 @@ public class VelogAuthenticationFilter extends AbstractAuthenticationProcessingF
         this.userRedisUtil = userRedisUtil;
     }
 
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
 

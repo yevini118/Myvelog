@@ -29,36 +29,32 @@ public class MyvelogController {
         return "index";
     }
 
-    @GetMapping("/main/{username}")
-    public String main(@PathVariable String username, Model model, @AuthenticationPrincipal Object customUserDetails) throws InterruptedException, JsonProcessingException {
+    @GetMapping("/main")
+    public String main(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) throws InterruptedException, JsonProcessingException {
 
-        User user = userService.getUser(username);
+        MainResponseDto responseDto = myvelogService.main(customUserDetails.getUsername(), customUserDetails.getPassword());
 
-        System.out.println(customUserDetails.getUser());
-
-        MainResponseDto responseDto = myvelogService.main(username, user.getAccessToken());
-
-        model.addAttribute("user", user);
+        model.addAttribute("user", customUserDetails.getUser());
         model.addAttribute("stats", responseDto.getMyvelogStats());
         model.addAttribute("news", responseDto.getNews());
 
         return "main";
     }
 
-    @GetMapping("/post/{username}")
-    public String post(@PathVariable String username, Model model) {
+    @GetMapping("/post")
+    public String post(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
 
-        model.addAttribute("user", userService.getUser(username));
-        model.addAttribute("post", myvelogService.post(username));
+        model.addAttribute("user", customUserDetails.getUser());
+        model.addAttribute("post", myvelogService.post(customUserDetails.getUsername()));
 
         return "post";
     }
 
-    @GetMapping("/day/{username}")
-    public String day(@PathVariable String username, @RequestParam(required = false) LocalDate date, Model model) {
+    @GetMapping("/day")
+    public String day(@AuthenticationPrincipal CustomUserDetails customUserDetails, @RequestParam(required = false) LocalDate date, Model model) {
 
-        model.addAttribute("user", userService.getUser(username));
-        model.addAttribute("day",myvelogService.day(username, date));
+        model.addAttribute("user", customUserDetails.getUser());
+        model.addAttribute("day", myvelogService.day(customUserDetails.getUsername(), date));
 
         return "day";
     }
