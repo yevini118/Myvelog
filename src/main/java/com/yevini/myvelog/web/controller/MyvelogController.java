@@ -2,7 +2,6 @@ package com.yevini.myvelog.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yevini.myvelog.global.security.CustomUserDetails;
-import com.yevini.myvelog.model.velog.User;
 import com.yevini.myvelog.web.dto.MainResponseDto;
 import com.yevini.myvelog.web.service.MyvelogService;
 import com.yevini.myvelog.web.service.UserService;
@@ -11,7 +10,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;

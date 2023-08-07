@@ -1,6 +1,7 @@
 package com.yevini.myvelog.global.config;
 
 import com.yevini.myvelog.global.security.CustomAuthenticationSuccessHandler;
+import com.yevini.myvelog.global.security.VelogAuthenticationEntryPoint;
 import com.yevini.myvelog.global.security.VelogAuthenticationFilter;
 import com.yevini.myvelog.global.security.VelogAuthenticationProvider;
 import com.yevini.myvelog.global.util.JwtUtil;
@@ -14,6 +15,7 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 
@@ -21,7 +23,7 @@ import java.util.Arrays;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableWebSecurity
+@EnableWebSecurity(debug = true)
 public class WebSecurityConfig{
 
     private final SeleniumService seleniumService;
@@ -39,10 +41,19 @@ public class WebSecurityConfig{
                 .anonymous().disable()
                 .csrf().disable()
 
-                .authorizeHttpRequests()
-                .anyRequest().permitAll()
+                .logout()
+                .logoutSuccessUrl("/")
+
                 .and()
-                .addFilterBefore(velogAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .authorizeHttpRequests()
+                .requestMatchers("/", "/login", "/css/**", "/js/**", "/img/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .addFilterBefore(velogAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class).sessionManagement()
+
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/"));
 
         return http.build();
     }

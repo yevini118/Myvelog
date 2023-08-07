@@ -1,6 +1,8 @@
 package com.yevini.myvelog.global.exception;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.mongodb.DuplicateKeyException;
+import com.mongodb.MongoWriteException;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.TimeoutException;
 import org.springframework.ui.Model;
@@ -32,5 +34,11 @@ public class GlobalExceptionHandler {
 
         model.addAttribute("logout", true);
         return "index";
+    }
+
+    @ExceptionHandler(value = MongoWriteException.class)
+    public String handleMongoWriteException(Exception e) {
+        log.error("[MongoWriteException] {}", e.getMessage());
+        return "redirect:/subscribe";
     }
 }

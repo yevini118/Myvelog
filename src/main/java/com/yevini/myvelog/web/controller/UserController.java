@@ -17,21 +17,21 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/login")
-    public String login() throws JsonProcessingException, IOException {
+//    @GetMapping("/login")
+//    public String login() throws JsonProcessingException, IOException {
+//
+//        String username = userService.login();
+//        log.info("[Login] {}", username);
+//
+//        return "redirect:/main/" + username;
+//    }
 
-        String username = userService.login();
-        log.info("[Login] {}", username);
-
-        return "redirect:/main/" + username;
-    }
-
-    @GetMapping("/logout/{username}")
-    public String logout(@PathVariable String username) {
-
-        userService.logout(username);
-        log.info("[Logout] {}", username);
-
-        return "redirect:/";
-    }
+//    @GetMapping("/logout/{username}")
+//    public String logout(@PathVariable String username) {
+//
+//        userService.logout(username);
+//        log.info("[Logout] {}", username);
+//
+//        return "redirect:/";
+//    }
 }

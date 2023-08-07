@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yevini.myvelog.model.monbodb.Subscribe;
 import com.yevini.myvelog.model.response.*;
 import com.yevini.myvelog.model.velog.User;
+import com.yevini.myvelog.web.dto.SubscribeResponseDto;
 import com.yevini.myvelog.web.dto.request.RequestBody;
 import com.yevini.myvelog.web.dto.request.variables.*;
 import lombok.RequiredArgsConstructor;
@@ -42,11 +43,11 @@ public class WebClientService {
     }
 
 
-    public List<UserProfile> getUserProfile(List<Subscribe> subscribes) {
+    public List<SubscribeResponseDto> getUserProfile(List<Subscribe> subscribes) {
 
         CountDownLatch countDownLatch = new CountDownLatch(subscribes.size());
 
-        List<UserProfile> userProfiles = Collections.synchronizedList(new ArrayList<>());
+        List<SubscribeResponseDto> responseDtos = Collections.synchronizedList(new ArrayList<>());
         for (Subscribe subscribe : subscribes) {
 
             Variables variables = new UserProfileVariables(subscribe.getUsername());
@@ -73,7 +74,9 @@ public class WebClientService {
                     .retrieve()
                     .bodyToMono(UserProfile.class)
                     .doOnTerminate(countDownLatch::countDown)
-                    .subscribe(userProfiles::add);
+                    .subscribe(userProfile -> {
+                        responseDtos.add(new SubscribeResponseDto(subscribe.getId(), userProfile));
+                    });
         }
 
         try {
@@ -82,7 +85,7 @@ public class WebClientService {
             e.printStackTrace();
         }
 
-        return userProfiles;
+        return responseDtos;
     }
 
     public UserTags getUserTags(String username){
