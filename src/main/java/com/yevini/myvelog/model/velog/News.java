@@ -43,9 +43,9 @@ public class News {
 
         for (PostStat postStat : postStats) {
             postStatsHistory.stream()
-                    .filter(history -> history.getId().equals(postStat.getId()) && (history.getVisits() != postStat.getVisits() || history.getLikes() != postStat.getLikes()))
+                    .filter(history -> history.getId().equals(postStat.getId()) && (history.getVisits() != postStat.getVisits() || history.getLikes() != postStat.getLikes() || history.getCommentsCount() != postStat.getCommentsCount()))
                     .findFirst()
-                    .map(any -> new NewPostStat(any, postStat.getVisits() - any.getVisits(), postStat.getLikes() - any.getLikes()))
+                    .map(any -> new NewPostStat(any, postStat.getVisits() - any.getVisits(), postStat.getLikes() - any.getLikes(), postStat.getCommentsCount() - any.getCommentsCount()))
                     .ifPresent(newList::add);
         }
 

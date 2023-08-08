@@ -8,6 +8,7 @@ import com.yevini.myvelog.model.velog.News;
 import com.yevini.myvelog.model.velog.PostStat;
 import com.yevini.myvelog.web.dto.DayResponseDto;
 import com.yevini.myvelog.web.dto.MainResponseDto;
+import com.yevini.myvelog.web.dto.NewPostStat;
 import com.yevini.myvelog.web.dto.PostResponseDto;
 import com.yevini.myvelog.model.response.Posts;
 import com.yevini.myvelog.model.response.Stat;

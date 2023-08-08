@@ -10,11 +10,13 @@ public class NewPostStat {
     private String title;
     private int likesUp;
     private int visitsUp;
+    private int commentsUp;
 
-    public NewPostStat(PostStat postStat, int visitsUp, int likesUp) {
+    public NewPostStat(PostStat postStat, int visitsUp, int likesUp, int commentsUp) {
         this.id = postStat.getId();
         this.title = postStat.getTitle();
         this.visitsUp = visitsUp;
         this.likesUp = likesUp;
+        this.commentsUp = commentsUp;
     }
 }

@@ -26,14 +26,15 @@ public class SeleniumService{
     private final ChromeOptions chromeOptions;
     private static final String URL = "https://velog.io/";
 
-    private static final String CHROME_PATH = "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+    private static final String CHROME_PATH = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
 
     private static final String CHROME_DATA_PATH = "C:/Selenium/ChromeData";
 
-    private static final String CHROMEDRIVER_PATH = "C:\\Users\\yevin\\Downloads\\chromedriver.exe";
+    private static final String CHROMEDRIVER_PATH = "C:\\Users\\USER\\Downloads\\chromedriver.exe";
 
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
     private static final String USER_PROFILE_CLASS_NAME = "sc-hBUSln";
+    private static final String REFRESH_TOKEN_CLASS_NAME = "sc-fFeiMQ";
 
     private static final int LOGIN_MAX_MINUTE = 3;
 
@@ -50,7 +51,6 @@ public class SeleniumService{
     public User login() throws JsonProcessingException , IOException{
 
         openLoginPage();
-
         waitUntilLogin();
 
         CurrentUser currentUser = getCurrentUser();
@@ -78,8 +78,11 @@ public class SeleniumService{
         driver = new ChromeDriver(chromeOptions);
         driver.get(URL);
 
-        if (!isLoggedIn()) {
+        if (!isAccessTokenExist() && !isRefreshTokenExist()) {
             driver.findElement(By.className(LOGIN_BUTTON_CLASS_NAME)).click();
+        }
+        else if (!isAccessTokenExist()) {
+            driver.get(URL + "saves");
         }
     }
 
@@ -95,10 +98,16 @@ public class SeleniumService{
         }
     }
 
-    private boolean isLoggedIn() {
+    private boolean isAccessTokenExist() {
 
         return driver.manage().getCookieNamed("access_token") != null;
     }
+
+    private boolean isRefreshTokenExist() {
+
+        return driver.manage().getCookieNamed("refresh_token") != null;
+    }
+
 
     private String getAccessToken(){
 
@@ -109,7 +118,6 @@ public class SeleniumService{
     private CurrentUser getCurrentUser() throws JsonProcessingException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-
         LocalStorage localStorage = getLocalStorage();
 
         String currentUser = localStorage.getItem("CURRENT_USER");

@@ -33,9 +33,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         CustomUserDetails customUserDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = customUserDetails.getUsername();
 
-//        Duration duration = jwtUtil.getDurationLeft(customUserDetails.getUser().getAccessToken());
-//        request.getSession().setMaxInactiveInterval((int) duration.toSeconds());
-        request.getSession().setMaxInactiveInterval(60);
+        Duration duration = jwtUtil.getDurationLeft(customUserDetails.getUser().getAccessToken());
+        request.getSession().setMaxInactiveInterval((int) duration.toSeconds());
 
         log.info("[Login] {}",username);
         response.sendRedirect(defaultSuccessUrl);

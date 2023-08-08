@@ -77,6 +77,7 @@ public class MyvelogStats {
                     .urlSlug(posts.get(i).getUrlSlug())
                     .likes(posts.get(i).getLikes())
                     .visits(stats.get(i).getTotal())
+                    .commentsCount(posts.get(i).getCommentsCount())
                     .countByDays(stats.get(i).getCountByDays())
                     .build());
         }

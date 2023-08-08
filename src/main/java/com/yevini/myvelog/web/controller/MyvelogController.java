@@ -5,8 +5,10 @@ import com.yevini.myvelog.global.security.CustomUserDetails;
 import com.yevini.myvelog.web.dto.MainResponseDto;
 import com.yevini.myvelog.web.service.MyvelogService;
 import com.yevini.myvelog.web.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,6 @@ public class MyvelogController {
     public String main(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) throws InterruptedException, JsonProcessingException {
 
         MainResponseDto responseDto = myvelogService.main(customUserDetails.getUsername(), customUserDetails.getPassword());
-
 
         model.addAttribute("user", customUserDetails.getUser());
         model.addAttribute("stats", responseDto.getMyvelogStats());

@@ -15,15 +15,17 @@ public class PostStat {
     private String title;
     private String urlSlug;
     private int likes;
+    private int commentsCount;
     private int visits;
     private List<CountByDay> countByDays;
 
     @Builder
-    public PostStat(String id, String title, String urlSlug, int likes, int visits, List<CountByDay> countByDays) {
+    public PostStat(String id, String title, String urlSlug, int likes, int commentsCount, int visits, List<CountByDay> countByDays) {
         this.id = id;
         this.title = title;
         this.urlSlug = urlSlug;
         this.likes = likes;
+        this.commentsCount = commentsCount;
         this.visits = visits;
         this.countByDays = countByDays;
     }

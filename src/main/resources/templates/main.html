@@ -27,7 +27,7 @@
 
                         <!-- image -->
                         <div class="img-wrapper w-40 h-40 flex justify-center items-center">
-                            <img src="/img/total.png" alt="img title">
+                            <img src="/images/total.png" alt="img title">
                         </div>
                         <!-- end image -->
 
@@ -70,7 +70,7 @@
                                     <span class="num-4" th:text="${stats.totalLikes}"></span>
                                     <p>총 좋아요</p>
                                 </h1>
-                                <img src="/img/like.png" alt="img like" style="width: 15%;height: 15%;">
+                                <img src="/images/like.png" alt="img like" style="width: 15%;height: 15%;">
                             </div>
                             <div class="mt-20 mb-2 flex items-center" style="margin-top: 10px; margin-left: 20px;">
                                 <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: #4fd1c578; ">
@@ -89,7 +89,7 @@
                                     <span class="num-2" th:text="${stats.totalPosts}"></span>
                                     <p>총 게시글</p>
                                 </h1>
-                                <img src="/img/post.png" alt="img post" style="width: 15%;height: 15%;">
+                                <img src="/images/post.png" alt="img post" style="width: 15%;height: 15%;">
                             </div>
                             <div class="mt-20 mb-2 flex items-center" style="margin-top: 10px; margin-left: 20px;">
                                 <div class="py-1 px-3 rounded bg-green-200 text-green-900 mr-3" style="background: #4fd1c578;">
@@ -137,7 +137,7 @@
                             <td class="border border-l-0 px-4 py-2" th:text="${postStat.title}"></td>
                             <td class="border border-l-0 border-r-0 px-4 py-2">
                                 <i class="fa fa-caret-up" aria-hidden="true" style="color: #ff0000a8; margin-right: 5px;"></i>
-                                [[${postStat.visitsUp}]]
+                                [[${postStat.commentsUp}]]
                             </td>
                         </tr>
 
