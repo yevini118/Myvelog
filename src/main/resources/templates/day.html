@@ -97,7 +97,7 @@
 
                     <tr th:each="postStat : ${day.postStats}">
                         <td class="border border-l-0 px-4 py-2 text-center" id="index" th:text="${postStatStat.count}"></td>
-                        <td class="border border-l-0 px-4 py-2"><a th:href="@{'https://velog.io/@' + ${user.username} + '/' + ${postStat.urlSlug}}" th:text="${postStat.title}"></td>
+                        <td class="border border-l-0 px-4 py-2"><a target="_blank" th:href="@{'https://velog.io/@' + ${user.username} + '/' + ${postStat.urlSlug}}" th:text="${postStat.title}"></a></td>
                         <td class="border border-l-0 border-r-0 px-4 py-2">[[${postStat.visits}]]</td>
                     </tr>
 

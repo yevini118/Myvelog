@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class Posts {
 
     private final List<Post> posts;
-    private LocalDateTime dateTime;
+//    private LocalDateTime dateTime;
 
     @JsonCreator
     public Posts(@JsonProperty("data") JsonNode node) throws JsonProcessingException {

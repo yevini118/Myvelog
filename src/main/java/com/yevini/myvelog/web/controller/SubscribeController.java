@@ -4,6 +4,7 @@ import com.yevini.myvelog.global.security.CustomUserDetails;
 import com.yevini.myvelog.model.monbodb.Subscribe;
 import com.yevini.myvelog.model.response.UserProfile;
 import com.yevini.myvelog.repository.SubscribeRepository;
+import com.yevini.myvelog.web.dto.FeedResponseDto;
 import com.yevini.myvelog.web.dto.SubscribeResponseDto;
 import com.yevini.myvelog.web.service.SubscribeService;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,11 @@ public class SubscribeController {
     private final SubscribeService subscribeService;
 
     @GetMapping("/feed")
-    public String feed(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public String feed(@AuthenticationPrincipal CustomUserDetails customUserDetails, Model model) {
+
+        List<FeedResponseDto> responseDtos = subscribeService.feed(customUserDetails.getUsername());
+        model.addAttribute("feeds", responseDtos);
+
         return "feed";
     }
 

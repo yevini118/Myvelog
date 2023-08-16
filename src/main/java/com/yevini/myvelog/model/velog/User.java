@@ -24,13 +24,4 @@ public class User{
         return new VelogAuthenticationToken(username, accessToken);
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", thumbnail='" + thumbnail + '\'' +
-                ", displayName='" + displayName + '\'' +
-                ", accessToken='" + accessToken + '\'' +
-                '}';
-    }
 }

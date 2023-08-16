@@ -30,7 +30,7 @@ public class SeleniumService{
 
     private static final String CHROME_DATA_PATH = "C:/Selenium/ChromeData";
 
-    private static final String CHROMEDRIVER_PATH = "C:\\Users\\USER\\Downloads\\chromedriver.exe";
+    private static final String CHROMEDRIVER_PATH = "C:\\Users\\yevin\\Downloads\\chromedriver.exe";
 
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
     private static final String USER_PROFILE_CLASS_NAME = "sc-hBUSln";

@@ -2,26 +2,21 @@ package com.yevini.myvelog.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.yevini.myvelog.global.util.redis.MyVelogStatsRedisUtil;
-import com.yevini.myvelog.model.response.CountByDay;
+import com.yevini.myvelog.model.response.Posts;
+import com.yevini.myvelog.model.response.Stat;
+import com.yevini.myvelog.model.response.UserTags;
 import com.yevini.myvelog.model.velog.MyvelogStats;
 import com.yevini.myvelog.model.velog.News;
 import com.yevini.myvelog.model.velog.PostStat;
 import com.yevini.myvelog.web.dto.DayResponseDto;
 import com.yevini.myvelog.web.dto.MainResponseDto;
-import com.yevini.myvelog.web.dto.NewPostStat;
 import com.yevini.myvelog.web.dto.PostResponseDto;
-import com.yevini.myvelog.model.response.Posts;
-import com.yevini.myvelog.model.response.Stat;
-import com.yevini.myvelog.model.response.UserTags;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Comparator.comparing;
 
 @Slf4j
 @RequiredArgsConstructor

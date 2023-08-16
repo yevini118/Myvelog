@@ -88,6 +88,7 @@ public class WebClientService {
         return responseDtos;
     }
 
+
     public UserTags getUserTags(String username){
 
         Variables variables = new UserTagsVariables(username);
@@ -131,7 +132,9 @@ public class WebClientService {
                             posts(cursor: $cursor, username: $username, temp_only: $temp_only, tag: $tag, limit: $limit) {
                                 id
                                 title
+                                short_description
                                 thumbnail
+                                released_at
                                 comments_count
                                 tags
                                 likes
