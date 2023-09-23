@@ -29,8 +29,14 @@ jobs:
     - name: Make properties file
       uses: actions/checkout@v2
       run: 
-        touch ./src/main/resources/application-security.properties
-        echo "${{ secrets.APPLICATION_PROPERTIES }}" > ./src/main/resources/application-security.properties
+        touch ./src/main/resources/application-private.properties
+        echo "${{ secrets.PRIVATE_PROPERTIES }}" > ./src/main/resources/application-private.properties
+
+    - name: Make properties file
+      uses: actions/checkout@v2
+      run:
+        touch ./src/main/resources/application-selenium.properties
+        echo "${{ secrets.SELENIUM_PROPERTIES }}" > ./src/main/resources/application-selenium.properties
         
     - name: Build with Gradle
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0

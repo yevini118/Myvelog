@@ -2,6 +2,7 @@ package com.yevini.myvelog.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yevini.myvelog.global.config.SeleniumConfig;
 import com.yevini.myvelog.model.response.CurrentUser;
 import com.yevini.myvelog.model.velog.User;
 import org.openqa.selenium.*;
@@ -24,24 +25,17 @@ public class SeleniumService{
 
     private WebDriver driver;
     private final ChromeOptions chromeOptions;
+    private SeleniumConfig seleniumConfig;
+
     private static final String URL = "https://velog.io/";
-
-    private static final String CHROME_PATH = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-
-    private static final String CHROME_DATA_PATH = "C:/Selenium/ChromeData";
-
-    private static final String CHROMEDRIVER_PATH = "C:\\Users\\yevin\\Downloads\\chromedriver.exe";
-
-    private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
+    private static final String LOGIN_BUTTON_CLASS_NAME = "sc-fFeiMQ";
     private static final String USER_PROFILE_CLASS_NAME = "sc-hBUSln";
-    private static final String REFRESH_TOKEN_CLASS_NAME = "sc-fFeiMQ";
-
     private static final int LOGIN_MAX_MINUTE = 3;
 
     public SeleniumService() {
 
         System.setProperty("webdriver.http.factory", "jdk-http-client");
-        System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_PATH);
+        System.setProperty("webdriver.chrome.driver", seleniumConfig.getChromedriverPath());
 
         this.chromeOptions = new ChromeOptions();
         chromeOptions.setExperimentalOption("debuggerAddress", "127.0.0.1:9222");
@@ -68,12 +62,12 @@ public class SeleniumService{
 
     public void logout() {
 
-        FileSystemUtils.deleteRecursively(new File(CHROME_DATA_PATH));
+        FileSystemUtils.deleteRecursively(new File(seleniumConfig.getChromeDataPath()));
     }
 
     private void openLoginPage() throws IOException {
 
-        Runtime.getRuntime().exec( CHROME_PATH + " --remote-debugging-port=9222 --user-data-dir=" + CHROME_DATA_PATH);
+        Runtime.getRuntime().exec(seleniumConfig.getChromePath() + " --remote-debugging-port=9222 --user-data-dir=" + seleniumConfig.getChromeDataPath());
 
         driver = new ChromeDriver(chromeOptions);
         driver.get(URL);

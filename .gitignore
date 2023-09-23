@@ -36,6 +36,5 @@ out/
 ### VS Code ###
 .vscode/
 
-private-application.properties
-application-mongodb.properties
-src/main/java/com/yevini/myvelog/crawling/SeleniumService.java
+application-selenium.properties
+application-private.properties
