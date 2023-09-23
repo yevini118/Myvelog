@@ -27,13 +27,13 @@ jobs:
         distribution: 'temurin'
 
     - name: Make private properties file
-      run:
+      run: |
         cd ./src/main/resources
         touch ./application-private.properties
         echo "${{ secrets.PRIVATE_PROPERTIES }}" > ./application-private.properties
 
     - name: Make selenium properties file
-      run:
+      run: |
         cd ./src/main/resources
         touch ./application-selenium.properties
         echo "${{ secrets.SELENIUM_PROPERTIES }}" > ./application-selenium.properties
