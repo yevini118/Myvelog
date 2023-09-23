@@ -54,7 +54,7 @@ jobs:
 
     - name: Build and push Docker images
       run:
-        docker build -t ${{ secrets.DOCKER_REPO }} .
+        docker build -t ${{ secrets.DOCKER_REPO }}.
         docker push ${{ secrets.DOCKER_REPO }}
     
     - name: Deploy Docker to AWS (EC2)
