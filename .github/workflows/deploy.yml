@@ -28,13 +28,15 @@ jobs:
 
     - name: Make private properties file
       run:
-        touch ./src/main/resources/application-private.properties
-        echo "${{ secrets.PRIVATE_PROPERTIES }}" > ./src/main/resources/application-private.properties
+        cd ./src/main/resources
+        touch ./application-private.properties
+        echo "${{ secrets.PRIVATE_PROPERTIES }}" > ./application-private.properties
 
     - name: Make selenium properties file
       run:
-        touch ./src/main/resources/application-selenium.properties
-        echo "${{ secrets.SELENIUM_PROPERTIES }}" > ./src/main/resources/application-selenium.properties
+        cd ./src/main/resources
+        touch ./application-selenium.properties
+        echo "${{ secrets.SELENIUM_PROPERTIES }}" > ./application-selenium.properties
         
     - name: Build with Gradle
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25 # v2.6.0
