@@ -25,14 +25,16 @@ public class SeleniumService{
 
     private WebDriver driver;
     private final ChromeOptions chromeOptions;
-    private SeleniumConfig seleniumConfig;
+    private final SeleniumConfig seleniumConfig;
 
     private static final String URL = "https://velog.io/";
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-fFeiMQ";
     private static final String USER_PROFILE_CLASS_NAME = "sc-hBUSln";
     private static final int LOGIN_MAX_MINUTE = 3;
 
-    public SeleniumService() {
+    public SeleniumService(SeleniumConfig seleniumConfig) {
+
+        this.seleniumConfig = seleniumConfig;
 
         System.setProperty("webdriver.http.factory", "jdk-http-client");
         System.setProperty("webdriver.chrome.driver", seleniumConfig.getChromedriverPath());
