@@ -26,15 +26,15 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    - name: Make properties file
-      uses: actions/checkout@v2
-      run: 
+    - name: Make private properties file
+    - uses: actions/checkout@v2
+    - run: 
         touch ./src/main/resources/application-private.properties
         echo "${{ secrets.PRIVATE_PROPERTIES }}" > ./src/main/resources/application-private.properties
 
-    - name: Make properties file
-      uses: actions/checkout@v2
-      run:
+    - name: Make selenium properties file
+    - uses: actions/checkout@v2
+    - run:
         touch ./src/main/resources/application-selenium.properties
         echo "${{ secrets.SELENIUM_PROPERTIES }}" > ./src/main/resources/application-selenium.properties
         
