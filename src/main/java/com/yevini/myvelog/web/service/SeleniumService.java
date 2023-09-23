@@ -26,12 +26,9 @@ public class SeleniumService{
     private WebDriver driver;
     private final ChromeOptions chromeOptions;
 
-    @Value("${selenium.chromedriver.path}")
-    private static String CHROMEDRIVER_PATH;
-    @Value("${selenium.chrome.data.path}")
-    private static String CHROME_DATA_PATH;
-    @Value("${selenium.chrome.path}")
-    private static String CHROME_PATH;
+    private static final String CHROMEDRIVER_PATH = "/usr/bin/chromedriver";
+    private static final String CHROME_DATA_PATH = "/home/ubuntu/Selenium/ChromeData";
+    private static final String CHROME_PATH = "/opt/google/chrome/chrome";
 
     private static final String URL = "https://velog.io/";
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-fFeiMQ";
