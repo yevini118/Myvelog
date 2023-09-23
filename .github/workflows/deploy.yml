@@ -27,13 +27,13 @@ jobs:
         distribution: 'temurin'
 
     - name: Make private properties file
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
     - run: 
         touch ./src/main/resources/application-private.properties
         echo "${{ secrets.PRIVATE_PROPERTIES }}" > ./src/main/resources/application-private.properties
 
     - name: Make selenium properties file
-    - uses: actions/checkout@v2
+      uses: actions/checkout@v2
     - run:
         touch ./src/main/resources/application-selenium.properties
         echo "${{ secrets.SELENIUM_PROPERTIES }}" > ./src/main/resources/application-selenium.properties
