@@ -64,6 +64,7 @@ jobs:
         username: ubuntu
         key: ${{ secrets.AWS_KEY }}
         script: |
+          cd app
           docker rm $(docker ps -a -q) 
           sudo docker pull ${{ secrets.DOCKER_REPO }}
           sudo docker-compose up -d
