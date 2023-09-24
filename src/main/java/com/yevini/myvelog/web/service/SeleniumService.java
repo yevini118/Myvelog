@@ -41,6 +41,7 @@ public class SeleniumService{
         System.setProperty("webdriver.chrome.driver", CHROMEDRIVER_PATH);
 
         this.chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
         chromeOptions.setExperimentalOption("debuggerAddress", "127.0.0.1:9222");
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
     }
