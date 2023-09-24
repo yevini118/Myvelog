@@ -42,6 +42,7 @@ public class SeleniumService{
 
         this.chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--no-sandbox");
         chromeOptions.setExperimentalOption("debuggerAddress", "127.0.0.1:9222");
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
     }
@@ -71,7 +72,7 @@ public class SeleniumService{
 
     private void openLoginPage() throws IOException {
 
-//        Runtime.getRuntime().exec(CHROME_PATH + "--headless --remote-debugging-port=9222 --user-data-dir=" + CHROME_DATA_PATH);
+        Runtime.getRuntime().exec(CHROME_PATH + "--headless --remote-debugging-port=9222 --user-data-dir=" + CHROME_DATA_PATH);
 
         driver = new ChromeDriver(chromeOptions);
         driver.get(URL);
