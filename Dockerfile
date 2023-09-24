@@ -1,4 +1,4 @@
-FROM openjdk:17
+FROM openjdk:17.0.1-jdk-slim
 RUN apt-get -y update
 RUN apt -y install wget
 RUN apt -y install unzip
