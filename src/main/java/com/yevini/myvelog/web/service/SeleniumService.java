@@ -72,7 +72,7 @@ public class SeleniumService{
 
     private void openLoginPage() throws IOException {
 
-        Runtime.getRuntime().exec(CHROME_PATH + " --headless --remote-debugging-port=9222 --user-data-dir=" + CHROME_DATA_PATH);
+        Runtime.getRuntime().exec("/bin/sh -c" + CHROME_PATH + " --headless --remote-debugging-port=9222 --user-data-dir=" + CHROME_DATA_PATH);
 
         driver = new ChromeDriver(chromeOptions);
         driver.get(URL);
