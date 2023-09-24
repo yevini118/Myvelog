@@ -43,7 +43,7 @@ public class SeleniumService{
         this.chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.setExperimentalOption("debuggerAddress", "127.0.0.1:9222");
+        chromeOptions.setExperimentalOption("debuggerAddress", "172.18.0.4:9222");
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
     }
 
