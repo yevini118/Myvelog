@@ -150,7 +150,8 @@ const githubBtn = document.getElementById('githubBtn');
 const googleBtn = document.getElementById('googleBtn');
 const facebookBtn = document.getElementById('facebookBtn');
 const snsModal = document.getElementById('modal-sns');
-const loginModal = document.getElementById('modal-login')
+const loginModal = document.getElementById('modal-login');
+const loginBtn = document.getElementById('loginBtn');
 
 openBtn.onclick = function() {
     modal.style.display = 'block';
@@ -159,6 +160,11 @@ openBtn.onclick = function() {
 }
 
 closeBtn.onclick = function() {
+    modal.style.display = 'none';
+    bg.style.display = 'none';
+}
+
+loginBtn.onclick = function() {
     modal.style.display = 'none';
     bg.style.display = 'none';
 }

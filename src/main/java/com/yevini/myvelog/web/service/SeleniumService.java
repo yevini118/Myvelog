@@ -26,11 +26,13 @@ public class SeleniumService{
 
     private static final String CHROMEDRIVER_PATH = "/usr/bin/chromedriver";
     private static final String CHROME_PATH = "/opt/google/chrome/chrome";
-
+//    private static final String CHROMEDRIVER_PATH = "C:\\Users\\USER\\Downloads\\chromedriver.exe";
+//    private static final String CHROME_PATH = "C:/Program Files/Google/Chrome/Application/chrome.exe";
+    private static final String LOGIN_BUTTON_XPATH = "/html/body/div[1]/div[2]/div[1]/div/div[2]/button[2]";
     private static final String URL = "https://velog.io/";
-    private static final String LOGIN_BUTTON_CLASS_NAME = "sc-fFeiMQ";
-    private static final String USER_PROFILE_CLASS_NAME = "sc-hBUSln";
-    private static final int LOGIN_MAX_MINUTE = 3;
+    private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
+    private static final String USER_PROFILE_XPATH = "//*[@id=\"root\"]/div[2]/div[1]/div/div[2]/div/div";
+    private static final int LOGIN_MAX_TIME = 5;
 
     public SeleniumService() {
 
@@ -40,15 +42,16 @@ public class SeleniumService{
         this.chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.setExperimentalOption("debuggerAddress", "172.18.0.4:9222");
+        chromeOptions.addArguments("--window-size=1920x1080");
+//        chromeOptions.setExperimentalOption("debuggerAddress", "localhost:9222");
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
     }
 
-    public User login(LoginRequestDto requestDto) throws JsonProcessingException , IOException{
+    public User login(LoginRequestDto requestDto) throws JsonProcessingException, IOException, InterruptedException {
 
         openLoginPage();
-        waitUntilLogin();
         snsLogin(requestDto);
+        waitUntilLogin();
 
         CurrentUser currentUser = getCurrentUser();
         String accessToken = getAccessToken();
@@ -70,20 +73,15 @@ public class SeleniumService{
 
     private void openLoginPage() throws IOException {
 
-        Runtime.getRuntime().exec(CHROME_PATH + " --remote-debugging-port=9222");
+//        Runtime.getRuntime().exec(CHROME_PATH + " --remote-debugging-port=9222");
 
         driver = new ChromeDriver(chromeOptions);
         driver.get(URL);
         driver.findElement(By.className(LOGIN_BUTTON_CLASS_NAME)).click();
-//        if (!isAccessTokenExist() && !isRefreshTokenExist()) {
-//            driver.findElement(By.className(LOGIN_BUTTON_CLASS_NAME)).click();
-//        }
-//        else if (!isAccessTokenExist()) {
-//            driver.get(URL + "saves");
-//        }
+
     }
 
-    private void snsLogin(LoginRequestDto requestDto) {
+    private void snsLogin(LoginRequestDto requestDto) throws InterruptedException {
 
         if (requestDto.getSns().equals("github")) {
             driver.findElement(By.xpath("//*[@id=\"root\"]/div[4]/div/div[2]/div[2]/div/div[1]/section[2]/div/a[1]")).click();
@@ -99,15 +97,19 @@ public class SeleniumService{
     }
 
     private void githubLogin(LoginRequestDto requestDto) {
+
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"login_field\"]")));
+
         driver.findElement(By.xpath("//*[@id=\"login_field\"]")).sendKeys(requestDto.getId());
         driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(requestDto.getPassword());
-        driver.findElement(By.xpath("//*[@id=\"login\"]/div[3]/form/div/input[13]")).click();
+        driver.findElement(By.xpath("//*[@id=\"login\"]/div[3]/form/div/input[13]")).sendKeys(Keys.ENTER);
     }
 
 
     private void waitUntilLogin() {
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofMinutes(LOGIN_MAX_MINUTE));
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(LOGIN_MAX_TIME));
 
         try {
             webDriverWait.until(loginCondition());
@@ -145,7 +147,7 @@ public class SeleniumService{
     }
 
     private static ExpectedCondition<WebElement> loginCondition() {
-        return ExpectedConditions.visibilityOfElementLocated(By.className(USER_PROFILE_CLASS_NAME));
+        return ExpectedConditions.visibilityOfElementLocated(By.xpath(USER_PROFILE_XPATH));
     }
 
     private LocalStorage getLocalStorage() {

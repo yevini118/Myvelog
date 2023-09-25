@@ -46,8 +46,13 @@ public class VelogAuthenticationFilter extends AbstractAuthenticationProcessingF
         String id = request.getParameter("id");
         String password = request.getParameter("password");
         LoginRequestDto loginRequestDto = new LoginRequestDto(sns, id, password);
-        
-        User user = seleniumService.login(loginRequestDto);
+
+        User user = null;
+        try {
+            user = seleniumService.login(loginRequestDto);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         VelogAuthenticationToken authenticationToken = user.toAuthentication();
 
         Duration duration = jwtUtil.getDurationLeft(user.getAccessToken());
