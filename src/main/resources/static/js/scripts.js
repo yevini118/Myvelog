@@ -169,28 +169,28 @@ loginBtn.onclick = function() {
     bg.style.display = 'none';
 }
 
-mailBtn.onclick = function() {
-    snsModal.style.display = 'none';
-    loginModal.style.display = 'block';
-    document.getElementById('sns').value = 'mail';
-}
+//mailBtn.onclick = function() {
+//    snsModal.style.display = 'none';
+//    loginModal.style.display = 'block';
+//    document.getElementById('sns').value = 'mail';
+//}
 
 githubBtn.onclick = function() {
     snsModal.style.display = 'none';
     loginModal.style.display = 'block';
     document.getElementById('sns').value = 'github';
 }
-
-googleBtn.onclick = function() {
-    snsModal.style.display = 'none';
-    loginModal.style.display = 'block';
-    document.getElementById('sns').value = 'google';
-}
-
-facebookBtn.onclick = function() {
-    snsModal.style.display = 'none';
-    loginModal.style.display = 'block';
-    document.getElementById('sns').value = 'facebook';
-}
+//
+//googleBtn.onclick = function() {
+//    snsModal.style.display = 'none';
+//    loginModal.style.display = 'block';
+//    document.getElementById('sns').value = 'google';
+//}
+//
+//facebookBtn.onclick = function() {
+//    snsModal.style.display = 'none';
+//    loginModal.style.display = 'block';
+//    document.getElementById('sns').value = 'facebook';
+//}
 
 

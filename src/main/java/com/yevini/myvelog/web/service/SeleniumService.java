@@ -102,6 +102,7 @@ public class SeleniumService{
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(1));
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"login_field\"]")));
 
+        System.out.println(driver.findElement(By.xpath("//*[@id=\"login\"]/div[3]/form/div/input[13]")).getText());
         driver.findElement(By.xpath("//*[@id=\"login_field\"]")).sendKeys(requestDto.getId());
         driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(requestDto.getPassword());
         driver.findElement(By.xpath("//*[@id=\"login\"]/div[3]/form/div/input[13]")).sendKeys(Keys.ENTER);
