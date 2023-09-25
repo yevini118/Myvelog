@@ -145,15 +145,46 @@ const openBtn = document.getElementById('popupBtn');
 const modal = document.getElementById('modal-wrap');
 const bg = document.getElementById('modal-bg');
 const closeBtn = document.getElementById('closeBtn');
+const mailBtn = document.getElementById('mailBtn');
+const githubBtn = document.getElementById('githubBtn');
+const googleBtn = document.getElementById('googleBtn');
+const facebookBtn = document.getElementById('facebookBtn');
+const snsModal = document.getElementById('modal-sns');
+const loginModal = document.getElementById('modal-login')
 
 openBtn.onclick = function() {
     modal.style.display = 'block';
     bg.style.display = 'block';
+    loginModal.style.display = 'none';
 }
 
 closeBtn.onclick = function() {
     modal.style.display = 'none';
     bg.style.display = 'none';
+}
+
+mailBtn.onclick = function() {
+    snsModal.style.display = 'none';
+    loginModal.style.display = 'block';
+    document.getElementById('sns').value = 'mail';
+}
+
+githubBtn.onclick = function() {
+    snsModal.style.display = 'none';
+    loginModal.style.display = 'block';
+    document.getElementById('sns').value = 'github';
+}
+
+googleBtn.onclick = function() {
+    snsModal.style.display = 'none';
+    loginModal.style.display = 'block';
+    document.getElementById('sns').value = 'google';
+}
+
+facebookBtn.onclick = function() {
+    snsModal.style.display = 'none';
+    loginModal.style.display = 'block';
+    document.getElementById('sns').value = 'facebook';
 }
 
 

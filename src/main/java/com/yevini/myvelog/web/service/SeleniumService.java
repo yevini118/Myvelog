@@ -2,6 +2,7 @@ package com.yevini.myvelog.web.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yevini.myvelog.global.security.LoginRequestDto;
 import com.yevini.myvelog.model.response.CurrentUser;
 import com.yevini.myvelog.model.velog.User;
 import org.openqa.selenium.*;
@@ -12,11 +13,8 @@ import org.openqa.selenium.html5.WebStorage;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.util.FileSystemUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -27,7 +25,6 @@ public class SeleniumService{
     private final ChromeOptions chromeOptions;
 
     private static final String CHROMEDRIVER_PATH = "/usr/bin/chromedriver";
-    private static final String CHROME_DATA_PATH = "/home/ubuntu/Selenium/ChromeData";
     private static final String CHROME_PATH = "/opt/google/chrome/chrome";
 
     private static final String URL = "https://velog.io/";
@@ -47,10 +44,11 @@ public class SeleniumService{
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
     }
 
-    public User login() throws JsonProcessingException , IOException{
+    public User login(LoginRequestDto requestDto) throws JsonProcessingException , IOException{
 
         openLoginPage();
         waitUntilLogin();
+        snsLogin(requestDto);
 
         CurrentUser currentUser = getCurrentUser();
         String accessToken = getAccessToken();
@@ -67,23 +65,45 @@ public class SeleniumService{
 
     public void logout() {
 
-        FileSystemUtils.deleteRecursively(new File(CHROME_DATA_PATH));
+//        FileSystemUtils.deleteRecursively(new File(CHROME_DATA_PATH));
     }
 
     private void openLoginPage() throws IOException {
 
-        Runtime.getRuntime().exec("/bin/sh -c" + CHROME_PATH + " --headless --remote-debugging-port=9222 --user-data-dir=" + CHROME_DATA_PATH);
+        Runtime.getRuntime().exec(CHROME_PATH + " --remote-debugging-port=9222");
 
         driver = new ChromeDriver(chromeOptions);
         driver.get(URL);
-
-        if (!isAccessTokenExist() && !isRefreshTokenExist()) {
-            driver.findElement(By.className(LOGIN_BUTTON_CLASS_NAME)).click();
-        }
-        else if (!isAccessTokenExist()) {
-            driver.get(URL + "saves");
-        }
+        driver.findElement(By.className(LOGIN_BUTTON_CLASS_NAME)).click();
+//        if (!isAccessTokenExist() && !isRefreshTokenExist()) {
+//            driver.findElement(By.className(LOGIN_BUTTON_CLASS_NAME)).click();
+//        }
+//        else if (!isAccessTokenExist()) {
+//            driver.get(URL + "saves");
+//        }
     }
+
+    private void snsLogin(LoginRequestDto requestDto) {
+
+        if (requestDto.getSns().equals("github")) {
+            driver.findElement(By.xpath("//*[@id=\"root\"]/div[4]/div/div[2]/div[2]/div/div[1]/section[2]/div/a[1]")).click();
+            githubLogin(requestDto);
+        }
+        else if (requestDto.getSns().equals("google")) {
+            driver.findElement(By.xpath("//*[@id=\"root\"]/div[4]/div/div[2]/div[2]/div/div[1]/section[2]/div/a[2]")).click();
+        }
+        else if (requestDto.getSns().equals("facebook")) {
+            driver.findElement(By.xpath("//*[@id=\"root\"]/div[4]/div/div[2]/div[2]/div/div[1]/section[2]/div/a[3]")).click();
+        }
+
+    }
+
+    private void githubLogin(LoginRequestDto requestDto) {
+        driver.findElement(By.xpath("//*[@id=\"login_field\"]")).sendKeys(requestDto.getId());
+        driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(requestDto.getPassword());
+        driver.findElement(By.xpath("//*[@id=\"login\"]/div[3]/form/div/input[13]")).click();
+    }
+
 
     private void waitUntilLogin() {
 
