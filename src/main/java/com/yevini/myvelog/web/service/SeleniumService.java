@@ -42,6 +42,7 @@ public class SeleniumService{
         this.chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
         chromeOptions.addArguments("--window-size=1920x1080");
 //        chromeOptions.setExperimentalOption("debuggerAddress", "localhost:9222");
         chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
