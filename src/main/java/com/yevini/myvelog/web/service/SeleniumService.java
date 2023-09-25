@@ -32,7 +32,7 @@ public class SeleniumService{
     private static final String URL = "https://velog.io/";
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
     private static final String USER_PROFILE_XPATH = "//*[@id=\"root\"]/div[2]/div[1]/div/div[2]/div/div";
-    private static final int LOGIN_MAX_TIME = 5;
+    private static final int LOGIN_MAX_TIME = 10;
 
     public SeleniumService() {
 
@@ -84,6 +84,9 @@ public class SeleniumService{
 
     private void snsLogin(LoginRequestDto requestDto) throws InterruptedException {
 
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div[4]/div/div[2]/div[2]/div/div[1]/section[2]/div")));
+
         if (requestDto.getSns().equals("github")) {
             driver.findElement(By.xpath("//*[@id=\"root\"]/div[4]/div/div[2]/div[2]/div/div[1]/section[2]/div/a[1]")).click();
             githubLogin(requestDto);
@@ -99,10 +102,10 @@ public class SeleniumService{
 
     private void githubLogin(LoginRequestDto requestDto) {
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(3));
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"login_field\"]")));
 
-        System.out.println(driver.findElement(By.xpath("//*[@id=\"login\"]/div[3]/form/div/input[13]")).getText());
+        System.out.println("test");
         driver.findElement(By.xpath("//*[@id=\"login_field\"]")).sendKeys(requestDto.getId());
         driver.findElement(By.xpath("//*[@id=\"password\"]")).sendKeys(requestDto.getPassword());
         driver.findElement(By.xpath("//*[@id=\"login\"]/div[3]/form/div/input[13]")).sendKeys(Keys.ENTER);
