@@ -32,7 +32,7 @@ public class SeleniumService{
     private static final String URL = "https://velog.io/";
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
     private static final String USER_PROFILE_XPATH = "//*[@id=\"root\"]/div[2]/div[1]/div/div[2]/div/div";
-    private static final int LOGIN_MAX_TIME = 10;
+    private static final int LOGIN_MAX_TIME = 30;
 
     public SeleniumService() {
 
