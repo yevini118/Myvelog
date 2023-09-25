@@ -84,7 +84,7 @@ public class SeleniumService{
 
     private void snsLogin(LoginRequestDto requestDto) throws InterruptedException {
 
-        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(1));
+        WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(3));
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"root\"]/div[4]/div/div[2]/div[2]/div/div[1]/section[2]/div")));
 
         if (requestDto.getSns().equals("github")) {
