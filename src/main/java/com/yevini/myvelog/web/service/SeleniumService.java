@@ -24,10 +24,10 @@ public class SeleniumService{
     private WebDriver driver;
     private final ChromeOptions chromeOptions;
 
-//    private static final String CHROMEDRIVER_PATH = "/usr/bin/chromedriver";
-//    private static final String CHROME_PATH = "/opt/google/chrome/chrome";
-    private static final String CHROMEDRIVER_PATH = "C:\\Users\\USER\\Downloads\\chromedriver.exe";
-    private static final String CHROME_PATH = "C:/Program Files/Google/Chrome/Application/chrome.exe";
+    private static final String CHROMEDRIVER_PATH = "/usr/bin/chromedriver";
+    private static final String CHROME_PATH = "/opt/google/chrome/chrome";
+//    private static final String CHROMEDRIVER_PATH = "C:\\Users\\USER\\Downloads\\chromedriver.exe";
+//    private static final String CHROME_PATH = "C:/Program Files/Google/Chrome/Application/chrome.exe";
     private static final String LOGIN_BUTTON_XPATH = "/html/body/div[1]/div[2]/div[1]/div/div[2]/button[2]";
     private static final String URL = "https://velog.io/";
     private static final String LOGIN_BUTTON_CLASS_NAME = "sc-egiyK";
