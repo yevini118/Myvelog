@@ -50,6 +50,7 @@ public class SeleniumService{
 
     public User login(LoginRequestDto requestDto) throws JsonProcessingException, IOException, InterruptedException {
 
+        chromeOptions.addArguments("--user-agent="+requestDto.getUserAgent());
         openLoginPage();
         snsLogin(requestDto);
         waitUntilLogin();

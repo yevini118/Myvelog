@@ -37,15 +37,11 @@ public class VelogAuthenticationFilter extends AbstractAuthenticationProcessingF
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
 
-//        ServletInputStream inputStream = request.getInputStream();
-//        String messageBody = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        LoginRequestDto loginRequestDto = objectMapper.readValue(messageBody, LoginRequestDto.class);
-
         String sns = request.getParameter("sns");
         String id = request.getParameter("id");
         String password = request.getParameter("password");
-        LoginRequestDto loginRequestDto = new LoginRequestDto(sns, id, password);
+        String userAgent = request.getHeader("User-Agent");
+        LoginRequestDto loginRequestDto = new LoginRequestDto(sns, id, password, userAgent);
 
         User user = null;
         try {

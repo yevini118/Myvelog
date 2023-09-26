@@ -12,5 +12,6 @@ public class LoginRequestDto {
     private String sns;
     private String id;
     private String password;
+    private String userAgent;
 
 }
